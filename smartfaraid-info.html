@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartFaraid – Panduan & Maklumat Faraid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:       #004F38;
+      --green-dark:  #003A28;
+      --green-md:    #005f45;
+      --gold:        #C89D48;
+      --gold-light:  #DEAF5F;
+      --gold-dark:   #B0892E;
+      --gold-pale:   #f5ead4;
+      --cream:       #faf7f2;
+      --white:       #ffffff;
+      --text:        #1a1a1a;
+      --muted:       #5a6e64;
+      --border:      #dae5de;
+      --radius:      12px;
+      --radius-lg:   20px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; color: var(--text); background: var(--white); line-height: 1.65; }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+      box-shadow: 0 2px 16px rgba(0,0,0,.28);
+    }
+    .nav__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav__mark {
+      width: 38px; height: 38px; border-radius: 9px;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+      display: grid; place-items: center;
+    }
+    .nav__mark svg { width: 22px; height: 22px; fill: var(--white); }
+    .nav__name { color: var(--white); font-weight: 700; font-size: 1.05rem; line-height: 1.1; }
+    .nav__name span { display: block; font-size: .62rem; font-weight: 400; opacity: .65; letter-spacing: .07em; text-transform: uppercase; }
+    .nav__links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav__links a { color: rgba(255,255,255,.8); text-decoration: none; font-size: .855rem; transition: color .2s; }
+    .nav__links a:hover, .nav__links a.active { color: var(--gold-light); }
+    .nav__btn {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+      color: var(--white); padding: .48rem 1.2rem; border-radius: 8px;
+      font-size: .855rem; font-weight: 600; text-decoration: none; transition: opacity .2s;
+    }
+    .nav__btn:hover { opacity: .88; }
+    .nav__burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav__burger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+    .mob-menu { display: none; flex-direction: column; background: var(--green-dark); padding: 1rem 5% 1.5rem; gap: .7rem; }
+    .mob-menu a { color: rgba(255,255,255,.82); text-decoration: none; font-size: .9rem; padding: .4rem 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .mob-menu .nav__btn { display: inline-block; margin-top: .4rem; text-align: center; border: none; }
+    .mob-menu.open { display: flex; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 60%, #006649 100%);
+      padding: 4.5rem 5% 3.5rem;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 120px;
+      background: radial-gradient(ellipse, rgba(200,157,72,.18), transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero__tag {
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: rgba(200,157,72,.18); color: var(--gold-light);
+      padding: .3rem .85rem; border-radius: 20px;
+      font-size: .73rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+      margin-bottom: 1.1rem;
+    }
+    .page-hero__tag::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--gold-light); }
+    .page-hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: var(--white); line-height: 1.2; margin-bottom: 1rem; }
+    .page-hero h1 em { color: var(--gold-light); font-style: normal; }
+    .page-hero p { color: rgba(255,255,255,.75); max-width: 600px; margin: 0 auto 2rem; font-size: .95rem; line-height: 1.7; }
+    .hero-nav-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; }
+    .hero-nav-pills a {
+      background: rgba(255,255,255,.09); color: rgba(255,255,255,.85);
+      border: 1px solid rgba(255,255,255,.18); border-radius: 20px;
+      padding: .4rem 1rem; font-size: .8rem; text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+    .hero-nav-pills a:hover { background: rgba(200,157,72,.25); border-color: var(--gold); color: var(--gold-light); }
+
+    /* ── SHARED SECTION ── */
+    .sec { padding: 5rem 5%; }
+    .sec--alt { background: var(--cream); }
+    .sec--dark { background: linear-gradient(135deg, var(--green-dark), var(--green)); }
+
+    .sec-label {
+      font-size: .73rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: .5rem;
+    }
+    .sec-title {
+      font-size: clamp(1.4rem, 2.8vw, 2rem); font-weight: 800;
+      color: var(--green); line-height: 1.25; margin-bottom: .65rem;
+    }
+    .sec-title--white { color: var(--white); }
+    .sec-sub { color: var(--muted); max-width: 580px; font-size: .92rem; margin-bottom: 2.5rem; line-height: 1.7; }
+    .sec-sub--white { color: rgba(255,255,255,.68); }
+    .centered { text-align: center; }
+    .centered .sec-sub { margin-left: auto; margin-right: auto; }
+
+    /* ── WHY INTRO ── */
+    .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; max-width: 1100px; margin: 0 auto; }
+    .intro-body p { color: var(--muted); font-size: .93rem; line-height: 1.8; margin-bottom: 1rem; }
+    .intro-body p:last-child { margin-bottom: 0; }
+    .intro-body strong { color: var(--green); }
+    .intro-visual {
+      background: linear-gradient(145deg, var(--green-dark), var(--green));
+      border-radius: var(--radius-lg); padding: 2.5rem 2rem;
+      position: relative; overflow: hidden;
+    }
+    .intro-visual::before {
+      content: ''; position: absolute; top: -30px; right: -30px;
+      width: 140px; height: 140px; border-radius: 50%;
+      background: rgba(200,157,72,.15); pointer-events: none;
+    }
+    .intro-visual h3 { color: var(--gold-light); font-size: .8rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 1rem; }
+    .steps-mini { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+    .steps-mini li { display: flex; align-items: flex-start; gap: .85rem; }
+    .steps-mini__num {
+      flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+      color: var(--white); font-size: .75rem; font-weight: 700;
+      display: grid; place-items: center;
+    }
+    .steps-mini__text { color: rgba(255,255,255,.82); font-size: .855rem; line-height: 1.55; padding-top: 4px; }
+    .steps-mini__text strong { color: var(--white); display: block; font-size: .9rem; }
+
+    /* ── PRIOR OBLIGATIONS ── */
+    .obligations { max-width: 900px; margin: 0 auto; }
+    .obligations__intro { color: var(--muted); font-size: .93rem; line-height: 1.8; margin-bottom: 2.5rem; }
+    .oblig-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; }
+    .oblig-card {
+      background: var(--white); border-radius: var(--radius);
+      border-left: 4px solid var(--gold);
+      padding: 1.5rem 1.25rem;
+      box-shadow: 0 2px 10px rgba(0,79,56,.06);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .oblig-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,79,56,.1); }
+    .oblig-card__num {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+      color: var(--white); font-weight: 800; font-size: .85rem;
+      display: grid; place-items: center; margin-bottom: .85rem;
+    }
+    .oblig-card h3 { font-size: .9rem; font-weight: 700; color: var(--green); margin-bottom: .5rem; }
+    .oblig-card p { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+    .oblig-card ul { padding-left: 1rem; margin-top: .4rem; }
+    .oblig-card ul li { font-size: .81rem; color: var(--muted); line-height: 1.6; margin-bottom: .2rem; }
+
+    /* ── HEIRS / WARIS ── */
+    .waris-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 900px; margin: 0 auto; }
+    .waris-block {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius-lg); padding: 2rem;
+    }
+    .waris-block h3 { color: var(--gold-light); font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
+    .waris-block__desc { color: rgba(255,255,255,.6); font-size: .82rem; margin-bottom: 1.25rem; line-height: 1.55; }
+    .waris-table { width: 100%; border-collapse: collapse; }
+    .waris-table th { text-align: left; font-size: .73rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: rgba(255,255,255,.45); padding: .4rem .6rem; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .waris-table td { font-size: .82rem; color: rgba(255,255,255,.82); padding: .55rem .6rem; border-bottom: 1px solid rgba(255,255,255,.06); line-height: 1.4; }
+    .waris-table td:last-child { color: var(--gold-light); font-weight: 600; text-align: right; }
+    .waris-table tr:last-child td { border-bottom: none; }
+
+    /* ── BENEFITS GRID ── */
+    .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; max-width: 960px; margin: 0 auto; }
+    .benefit-card {
+      background: var(--white); border-radius: var(--radius); padding: 1.75rem 1.5rem;
+      border: 1.5px solid var(--border);
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .benefit-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,79,56,.1); }
+    .benefit-icon {
+      width: 52px; height: 52px; border-radius: 13px;
+      background: var(--gold-pale); display: grid; place-items: center; margin-bottom: 1rem;
+    }
+    .benefit-icon svg { width: 26px; height: 26px; fill: var(--gold); }
+    .benefit-card h3 { font-size: .92rem; font-weight: 700; color: var(--green); margin-bottom: .4rem; }
+    .benefit-card p { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── RISKS ── */
+    .risks-wrap { max-width: 880px; margin: 0 auto; }
+    .risks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .risk-card {
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius); padding: 1.25rem;
+      display: flex; align-items: center; gap: .85rem;
+    }
+    .risk-x {
+      flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(220,60,60,.2); display: grid; place-items: center;
+    }
+    .risk-x svg { width: 16px; height: 16px; fill: #ff8080; }
+    .risk-card span { color: rgba(255,255,255,.82); font-size: .855rem; font-weight: 500; }
+    .risks-note { text-align: center; color: rgba(255,255,255,.6); font-size: .875rem; line-height: 1.7; max-width: 580px; margin: 0 auto; }
+
+    /* ── PROCESS STEPS ── */
+    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 960px; margin: 0 auto; position: relative; }
+    .process-step {
+      background: var(--white); border-radius: var(--radius-lg); padding: 2rem 1.5rem; text-align: center;
+      border: 1.5px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,79,56,.05);
+      transition: transform .2s, box-shadow .2s;
+      position: relative;
+    }
+    .process-step:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,79,56,.1); }
+    .process-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+      color: var(--white); font-weight: 800; font-size: 1.1rem;
+      display: grid; place-items: center; margin: 0 auto 1rem;
+    }
+    .process-step h3 { font-size: .9rem; font-weight: 700; color: var(--green); margin-bottom: .5rem; }
+    .process-step p { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── AUDIENCE ── */
+    .audience-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; max-width: 880px; margin: 0 auto; }
+    .audience-card {
+      background: var(--white); border-radius: var(--radius); padding: 1.5rem 1rem; text-align: center;
+      border: 1.5px solid var(--border); transition: border-color .2s, transform .2s;
+    }
+    .audience-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .audience-icon { width: 52px; height: 52px; background: var(--gold-pale); border-radius: 50%; display: grid; place-items: center; margin: 0 auto .75rem; }
+    .audience-icon svg { width: 26px; height: 26px; fill: var(--gold); }
+    .audience-card h3 { font-size: .875rem; font-weight: 700; color: var(--green); margin-bottom: .3rem; }
+    .audience-card p { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── DOCUMENTS ── */
+    .docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; max-width: 900px; margin: 0 auto; }
+    .doc-card {
+      background: linear-gradient(145deg, var(--green-dark), var(--green));
+      border-radius: var(--radius); padding: 1.5rem;
+    }
+    .doc-card h3 { color: var(--gold-light); font-size: .88rem; font-weight: 700; margin-bottom: .5rem; }
+    .doc-card p { color: rgba(255,255,255,.72); font-size: .82rem; line-height: 1.6; }
+    .docs-note { text-align: center; margin-top: 1.5rem; font-size: .83rem; color: var(--muted); max-width: 560px; margin-left: auto; margin-right: auto; }
+
+    /* ── WHAT IS SMARTFARAID ── */
+    .sf-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; max-width: 1050px; margin: 0 auto; }
+    .sf-intro-text p { font-size: .93rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+    .sf-bullets { list-style: none; display: flex; flex-direction: column; gap: .6rem; margin-bottom: 1.5rem; }
+    .sf-bullets li { display: flex; align-items: flex-start; gap: .7rem; font-size: .88rem; color: var(--text); }
+    .sf-bullets li::before {
+      content: '';
+      flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; margin-top: 1px;
+      background: var(--gold-pale);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23C89D48' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-size: 14px; background-position: center;
+    }
+    .sf-closing {
+      background: var(--gold-pale); border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1rem 1.25rem; font-size: .88rem; color: var(--green); font-style: italic; line-height: 1.7; margin-top: 1rem;
+    }
+    .sf-sidebar {
+      background: linear-gradient(145deg, var(--green-dark), var(--green));
+      border-radius: var(--radius-lg); padding: 2rem; position: sticky; top: 80px;
+    }
+    .sf-sidebar h3 { color: var(--gold-light); font-size: .78rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 1.25rem; }
+    .sf-highlight-list { list-style: none; display: flex; flex-direction: column; gap: .9rem; }
+    .sf-highlight-list li { display: flex; align-items: flex-start; gap: .75rem; }
+    .sf-dot { flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); margin-top: 6px; }
+    .sf-highlight-list span { color: rgba(255,255,255,.82); font-size: .855rem; line-height: 1.55; }
+
+    /* ── AUL INFO BOX ── */
+    .aul-box {
+      background: var(--gold-pale); border: 2px solid var(--gold);
+      border-radius: var(--radius-lg); padding: 2rem 2.5rem;
+      max-width: 760px; margin: 0 auto;
+    }
+    .aul-box h3 { font-size: 1.05rem; font-weight: 800; color: var(--green); margin-bottom: .75rem; }
+    .aul-box p { font-size: .88rem; color: var(--muted); line-height: 1.75; }
+    .aul-box p + p { margin-top: .65rem; }
+    .aul-box strong { color: var(--green); }
+
+    /* ── FAQ ── */
+    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: .75rem; }
+    .faq-item { border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .faq-q {
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 1.4rem; background: var(--white);
+      font-size: .9rem; font-weight: 600; color: var(--green);
+      cursor: pointer; border: none; text-align: left; gap: 1rem;
+      transition: background .2s;
+    }
+    .faq-q:hover { background: var(--gold-pale); }
+    .faq-q svg { flex-shrink: 0; width: 18px; height: 18px; fill: var(--gold); transition: transform .3s; }
+    .faq-item.open .faq-q { background: var(--gold-pale); }
+    .faq-item.open .faq-q svg { transform: rotate(45deg); }
+    .faq-a { display: none; padding: 1rem 1.4rem 1.25rem; background: #fefdf9; font-size: .875rem; color: var(--muted); line-height: 1.75; border-top: 1px solid var(--border); }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ── CALC PROMO ── */
+    .calc-promo {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+      padding: 4.5rem 5%; text-align: center; position: relative; overflow: hidden;
+    }
+    .calc-promo::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 240px; height: 240px; border-radius: 50%;
+      background: rgba(200,157,72,.12); pointer-events: none;
+    }
+    .calc-promo h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; color: var(--white); margin-bottom: .9rem; line-height: 1.25; }
+    .calc-promo p { color: rgba(255,255,255,.72); max-width: 500px; margin: 0 auto 2rem; font-size: .93rem; line-height: 1.7; }
+    .calc-promo__btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-gold-solid {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+      color: var(--white); padding: .8rem 2rem; border-radius: 10px;
+      font-weight: 700; font-size: .95rem; text-decoration: none; display: inline-block;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn-gold-solid:hover { opacity: .9; transform: translateY(-2px); }
+    .btn-outline-white {
+      border: 2px solid rgba(255,255,255,.4); color: var(--white);
+      padding: .75rem 1.75rem; border-radius: 10px;
+      font-weight: 500; font-size: .95rem; text-decoration: none; display: inline-block;
+      transition: border-color .2s;
+    }
+    .btn-outline-white:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+    /* ── FOOTER ── */
+    .footer { background: var(--green-dark); color: rgba(255,255,255,.72); padding: 3rem 5% 1.5rem; }
+    .footer__top { display: flex; gap: 2.5rem; flex-wrap: wrap; justify-content: space-between; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 1.5rem; }
+    .footer__brand { max-width: 260px; }
+    .footer__brand-row { display: flex; align-items: center; gap: .75rem; margin-bottom: .75rem; }
+    .footer__brand-name { color: var(--white); font-weight: 700; font-size: 1rem; }
+    .footer__brand p { font-size: .81rem; line-height: 1.7; }
+    .footer__col h4 { color: var(--white); font-size: .83rem; font-weight: 700; margin-bottom: .75rem; }
+    .footer__col ul { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+    .footer__col ul a { color: rgba(255,255,255,.62); text-decoration: none; font-size: .81rem; transition: color .2s; }
+    .footer__col ul a:hover { color: var(--gold-light); }
+    .footer__bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: .78rem; color: rgba(255,255,255,.4); }
+    .footer__socials { display: flex; gap: .75rem; }
+    .footer__socials a { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,.07); display: grid; place-items: center; transition: background .2s; }
+    .footer__socials a:hover { background: var(--gold-dark); }
+    .footer__socials svg { width: 15px; height: 15px; fill: rgba(255,255,255,.7); }
+
+    /* ── ANIM ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .anim { opacity: 0; transform: translateY(22px); transition: opacity .5s ease, transform .5s ease; }
+      .anim.visible { opacity: 1; transform: none; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .intro-grid, .sf-intro-grid, .waris-grid { grid-template-columns: 1fr; }
+      .sf-sidebar { position: static; }
+    }
+    @media (max-width: 768px) {
+      .nav__links, .nav__btn { display: none; }
+      .nav__burger { display: flex; }
+      .sec { padding: 3.5rem 5%; }
+    }
+    @media (max-width: 480px) {
+      .oblig-cards, .benefits-grid, .risks-grid, .process-grid, .audience-grid { grid-template-columns: 1fr; }
+      .docs-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav__brand" href="home.html">
+    <div class="nav__mark">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+    </div>
+    <span class="nav__name">SmartFaraid <span>by SmartWills</span></span>
+  </a>
+  <ul class="nav__links">
+    <li><a href="home.html">Laman Utama</a></li>
+    <li><a href="#apaitufaraid">Apa Itu Faraid</a></li>
+    <li><a href="#kepentingan">Kepentingan</a></li>
+    <li><a href="#proses">Proses</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="smartfaraid-kalkulator.html" class="active">Kalkulator</a></li>
+  </ul>
+  <a class="nav__btn" href="https://app.mysmartwills.com/portal/?company_id=4">Mohon Sekarang</a>
+  <button class="nav__burger" id="hamburger" aria-label="Buka menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="home.html">Laman Utama</a>
+  <a href="#apaitufaraid">Apa Itu Faraid</a>
+  <a href="#kepentingan">Kepentingan</a>
+  <a href="#proses">Proses</a>
+  <a href="#faq">FAQ</a>
+  <a href="smartfaraid-kalkulator.html">Kalkulator Faraid</a>
+  <a class="nav__btn" href="https://app.mysmartwills.com/portal/?company_id=4">Mohon Sekarang</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero__tag">Panduan & Maklumat</div>
+  <h1>Memahami <em>Faraid</em><br />dari Asas hingga Pengiraan</h1>
+  <p>Panduan lengkap berkaitan sistem pembahagian harta pusaka Islam — kewajipan sebelum pembahagian, jenis-jenis waris, kaedah pengiraan, dan peranan SmartFaraid dalam membantu keluarga anda.</p>
+  <div class="hero-nav-pills">
+    <a href="#kenapa">Mengapa Faraid?</a>
+    <a href="#sebelum">Sebelum Pembahagian</a>
+    <a href="#waris">Jenis Waris</a>
+    <a href="#pengiraan">Kaedah Pengiraan</a>
+    <a href="#apaitusf">Apakah SmartFaraid?</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</section>
+
+<!-- KENAPA FARAID -->
+<section class="sec" id="kenapa">
+  <div class="intro-grid">
+    <div class="intro-body anim">
+      <p class="sec-label">Pengenalan</p>
+      <h2 class="sec-title">Mengapa Faraid Penting?</h2>
+      <p>Apabila seorang Muslim meninggal dunia, harta yang ditinggalkan tidak boleh diagihkan mengikut kehendak semata-mata. Allah SWT telah menetapkan satu sistem pembahagian yang adil melalui hukum Faraid — setiap waris menerima bahagian yang telah ditetapkan dalam Al-Quran.</p>
+      <p>Sistem ini memastikan tiada seorang waris pun yang dirugikan, dan harta diagihkan secara saksama berdasarkan tanggungjawab serta ikatan kekeluargaan antara si mati dengan warisnya.</p>
+      <p>Panduan ini membawa anda melalui keseluruhan proses — dari langkah-langkah wajib sebelum pengiraan, hinggalah kaedah menentukan bahagian setiap waris secara tepat.</p>
+    </div>
+    <div class="intro-visual anim" style="transition-delay:.12s">
+      <h3>Turutan Kewajipan Sebelum Faraid</h3>
+      <ol class="steps-mini">
+        <li>
+          <div class="steps-mini__num">1</div>
+          <div class="steps-mini__text"><strong>Kos Jenazah</strong>Perbelanjaan pengurusan dan pengebumian jenazah.</div>
+        </li>
+        <li>
+          <div class="steps-mini__num">2</div>
+          <div class="steps-mini__text"><strong>Hutang Si Mati</strong>Semua hutang kepada Allah dan sesama manusia.</div>
+        </li>
+        <li>
+          <div class="steps-mini__num">3</div>
+          <div class="steps-mini__text"><strong>Harta Sepencarian</strong>Bahagian pasangan yang masih hidup diasingkan dahulu.</div>
+        </li>
+        <li>
+          <div class="steps-mini__num">4</div>
+          <div class="steps-mini__text"><strong>Wasiat</strong>Maksimum 1/3 harta kepada bukan waris atau tujuan amal.</div>
+        </li>
+        <li>
+          <div class="steps-mini__num">5</div>
+          <div class="steps-mini__text"><strong>Pembahagian Faraid</strong>Baki harta dibahagikan kepada waris yang layak.</div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- SEBELUM PEMBAHAGIAN -->
+<section class="sec sec--alt" id="sebelum">
+  <div class="obligations">
+    <div class="centered anim">
+      <p class="sec-label">Keutamaan</p>
+      <h2 class="sec-title">Kewajipan Sebelum Pembahagian Faraid</h2>
+    </div>
+    <p class="obligations__intro anim">Harta pusaka bersih yang layak untuk Faraid hanya dikira selepas kesemua tanggungan berikut diselesaikan mengikut turutan keutamaan. Waris hanya berhak ke atas baki selepas semua potongan ini selesai.</p>
+    <div class="oblig-cards">
+      <div class="oblig-card anim">
+        <div class="oblig-card__num">1</div>
+        <h3>Kos Pengurusan Jenazah</h3>
+        <p>Perbelanjaan memandi, mengafan, dan mengebumikan jenazah diambil terlebih dahulu secara munasabah — tidak berlebihan dan tidak terlalu kurang.</p>
+      </div>
+      <div class="oblig-card anim" style="transition-delay:.08s">
+        <div class="oblig-card__num">2</div>
+        <h3>Hutang Si Mati</h3>
+        <p>Semua hutang wajib diselesaikan sebelum pembahagian:</p>
+        <ul>
+          <li>Hutang kepada Allah — zakat, kaffarah, nazar, haji</li>
+          <li>Hutang kepada manusia — pinjaman, bil, baki bayaran</li>
+        </ul>
+      </div>
+      <div class="oblig-card anim" style="transition-delay:.16s">
+        <div class="oblig-card__num">3</div>
+        <h3>Harta Sepencarian</h3>
+        <p>Harta yang diperoleh bersama suami-isteri semasa tempoh perkahwinan. Bahagian pasangan hidup diasingkan terlebih dahulu — ini bukan harta pusaka, tetapi hak milik pasangan.</p>
+      </div>
+      <div class="oblig-card anim" style="transition-delay:.24s">
+        <div class="oblig-card__num">4</div>
+        <h3>Wasiat</h3>
+        <p>Si mati boleh mewasiatkan sehingga 1/3 daripada harta pusaka bersih kepada pihak tertentu — tertakluk kepada syarat bahawa wasiat tidak boleh dibuat kepada waris Faraid tanpa persetujuan semua waris.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WARIS -->
+<section class="sec sec--dark" id="waris">
+  <div class="centered anim">
+    <p class="sec-label" style="color:var(--gold-light)">Kategori Waris</p>
+    <h2 class="sec-title sec-title--white">Siapa Waris yang Layak?</h2>
+    <p class="sec-sub sec-sub--white">Waris dalam Islam terbahagi kepada dua kategori utama berdasarkan jenis hak yang mereka terima.</p>
+  </div>
+  <div class="waris-grid">
+    <div class="waris-block anim">
+      <h3>Ashab al-Furud — Waris Bahagian Tetap</h3>
+      <p class="waris-block__desc">Waris yang menerima bahagian tetap seperti yang dinyatakan dalam Al-Quran. Bahagian mereka tidak berubah melainkan dalam keadaan tertentu.</p>
+      <table class="waris-table">
+        <thead>
+          <tr><th>Waris</th><th>Syarat</th><th>Bahagian</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Suami</td><td>Tiada anak</td><td>1/2</td></tr>
+          <tr><td>Suami</td><td>Ada anak</td><td>1/4</td></tr>
+          <tr><td>Isteri</td><td>Tiada anak</td><td>1/4</td></tr>
+          <tr><td>Isteri</td><td>Ada anak</td><td>1/8</td></tr>
+          <tr><td>Ibu</td><td>Ada anak / 2+ adik-beradik</td><td>1/6</td></tr>
+          <tr><td>Ibu</td><td>Tiada anak, &lt;2 adik-beradik</td><td>1/3</td></tr>
+          <tr><td>Bapa</td><td>Ada anak lelaki</td><td>1/6</td></tr>
+          <tr><td>Anak Perempuan</td><td>Seorang, tiada anak lelaki</td><td>1/2</td></tr>
+          <tr><td>Anak Perempuan</td><td>2+, tiada anak lelaki</td><td>2/3</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="waris-block anim" style="transition-delay:.12s">
+      <h3>Asabah — Waris Sisa (Residuary)</h3>
+      <p class="waris-block__desc">Waris Asabah menerima baki harta setelah waris bahagian tetap mengambil bahagian masing-masing. Jika tiada baki, mereka tidak menerima apa-apa.</p>
+      <table class="waris-table">
+        <thead>
+          <tr><th>Waris</th><th>Catatan</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Anak Lelaki</td><td colspan="1" style="color:rgba(255,255,255,.75);font-weight:400">Asabah bi nafsihi. Bersama anak perempuan, nisbah 2:1</td></tr>
+          <tr><td>Bapa</td><td style="color:rgba(255,255,255,.75);font-weight:400">Jadi Asabah jika tiada anak lelaki</td></tr>
+          <tr><td>Datuk</td><td style="color:rgba(255,255,255,.75);font-weight:400">Jika tiada bapa</td></tr>
+          <tr><td>Saudara Lelaki Seibu-sebapa</td><td style="color:rgba(255,255,255,.75);font-weight:400">Jika tiada anak dan bapa</td></tr>
+          <tr><td>Baitulmal</td><td style="color:rgba(255,255,255,.75);font-weight:400">Jika tiada waris langsung</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:1.25rem; background:rgba(200,157,72,.12); border-radius:8px; padding:1rem;">
+        <p style="color:rgba(255,255,255,.75); font-size:.81rem; line-height:1.65;"><strong style="color:var(--gold-light)">Nota:</strong> Anak lelaki dan perempuan bersama-sama dikira sebagai Asabah — bahagian anak lelaki adalah dua kali ganda bahagian anak perempuan (nisbah 2:1).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KAEDAH PENGIRAAN -->
+<section class="sec" id="pengiraan">
+  <div class="centered anim">
+    <p class="sec-label">Kaedah</p>
+    <h2 class="sec-title">Aliran Pengiraan Faraid</h2>
+    <p class="sec-sub centered" style="margin-bottom:2.5rem">Berikut ialah turutan pengiraan Faraid yang betul — dari menentukan harta bersih hinggalah pembahagian kepada waris.</p>
+  </div>
+  <div class="process-grid">
+    <div class="process-step anim">
+      <div class="process-num">1</div>
+      <h3>Tentukan Harta Pusaka Bersih</h3>
+      <p>Tolak kos jenazah, semua hutang, harta sepencarian, dan wasiat daripada jumlah harta kasar.</p>
+    </div>
+    <div class="process-step anim" style="transition-delay:.08s">
+      <div class="process-num">2</div>
+      <h3>Kenal Pasti Waris yang Layak</h3>
+      <p>Senaraikan semua waris yang masih hidup dan sahkan hubungan mereka dengan si mati.</p>
+    </div>
+    <div class="process-step anim" style="transition-delay:.16s">
+      <div class="process-num">3</div>
+      <h3>Tetapkan Bahagian Tetap</h3>
+      <p>Berikan setiap waris Ashab al-Furud bahagian tetap mereka berdasarkan jadual Faraid.</p>
+    </div>
+    <div class="process-step anim" style="transition-delay:.24s">
+      <div class="process-num">4</div>
+      <h3>Semak Jumlah — Aul Jika Perlu</h3>
+      <p>Jika jumlah bahagian melebihi 1, lakukan Aul — kurangkan bahagian setiap waris secara berkadar.</p>
+    </div>
+    <div class="process-step anim" style="transition-delay:.32s">
+      <div class="process-num">5</div>
+      <h3>Agihkan Baki kepada Asabah</h3>
+      <p>Jika ada baki selepas bahagian tetap, ia diagihkan kepada waris Asabah mengikut keutamaan.</p>
+    </div>
+    <div class="process-step anim" style="transition-delay:.4s">
+      <div class="process-num">6</div>
+      <h3>Baitulmal (Jika Tiada Waris)</h3>
+      <p>Sekiranya si mati tiada waris langsung, keseluruhan harta diserahkan kepada Baitulmal negeri.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:3rem" class="anim">
+    <div class="aul-box">
+      <h3>Apakah Itu Aul?</h3>
+      <p>Aul berlaku apabila jumlah keseluruhan bahagian tetap semua waris melebihi nilai harta yang ada. Sebagai contoh, jika jumlah bahagian berjumlah <strong>13/12</strong>, setiap waris akan menerima bahagiannya daripada penyebut <strong>13</strong> dan bukannya 12.</p>
+      <p>Dengan cara ini, semua waris masih menerima bahagian masing-masing — cuma dalam kadar yang sedikit lebih kecil secara berkadar. Prinsip Aul memastikan keadilan tetap terjaga walaupun harta terhad.</p>
+    </div>
+  </div>
+</section>
+
+<!-- APA ITU SMARTFARAID -->
+<section class="sec sec--alt" id="apaitusf">
+  <div class="sf-intro-grid">
+    <div class="sf-intro-text anim">
+      <p class="sec-label">Perkhidmatan Kami</p>
+      <h2 class="sec-title">Apakah SmartFaraid?</h2>
+      <h3 style="font-size:.95rem; font-weight:600; color:var(--muted); margin-bottom:1rem; font-weight:500">Fahami Pembahagian Harta Pusaka Anda</h3>
+      <p>SmartFaraid ialah perkhidmatan persediaan dan perancangan Faraid yang membantu keluarga Muslim mengenal pasti waris yang berhak serta memahami anggaran bahagian setiap waris berdasarkan prinsip Faraid.</p>
+      <p>Perkhidmatan ini merangkumi pengumpulan maklumat keluarga, penyusunan aset dan liabiliti, pengenalpastian waris serta penyediaan gambaran awal pembahagian harta pusaka.</p>
+      <p style="font-weight:600; color:var(--green); margin-bottom:.75rem">SmartFaraid membantu anda memahami:</p>
+      <ul class="sf-bullets">
+        <li>Siapakah waris Faraid yang berhak</li>
+        <li>Aset yang termasuk dalam harta pusaka</li>
+        <li>Hutang dan tanggungan yang perlu diselesaikan</li>
+        <li>Anggaran bahagian setiap waris</li>
+        <li>Persediaan dokumen sebelum urusan pusaka dimulakan</li>
+      </ul>
+      <div class="sf-closing">SmartFaraid bukan sekadar pengiraan, tetapi satu persediaan awal untuk membantu keluarga memahami keseluruhan kedudukan harta pusaka.</div>
+    </div>
+    <div class="sf-sidebar anim" style="transition-delay:.12s">
+      <h3>Skop Perkhidmatan</h3>
+      <ul class="sf-highlight-list">
+        <li><div class="sf-dot"></div><span>Pengumpulan dan semakan maklumat keluarga secara teratur</span></li>
+        <li><div class="sf-dot"></div><span>Penyusunan aset dan liabiliti si mati</span></li>
+        <li><div class="sf-dot"></div><span>Pengenalpastian waris yang layak berdasarkan hubungan keluarga</span></li>
+        <li><div class="sf-dot"></div><span>Penyediaan gambaran awal pembahagian harta pusaka</span></li>
+        <li><div class="sf-dot"></div><span>Panduan persediaan dokumen untuk permohonan Sijil Faraid</span></li>
+        <li><div class="sf-dot"></div><span>Sokongan daripada Panel Profesional SmartWills</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- KEPENTINGAN -->
+<section class="sec" id="kepentingan">
+  <div class="centered anim">
+    <p class="sec-label">Manfaat</p>
+    <h2 class="sec-title">Kepentingan Faraid</h2>
+    <p class="sec-sub centered">Kurangkan kekeliruan, permudahkan persediaan — untuk ketenangan keluarga anda.</p>
+  </div>
+  <div class="benefits-grid">
+    <div class="benefit-card anim">
+      <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+      <h3>Kenal Pasti Waris yang Berhak</h3>
+      <p>Memudahkan keluarga mengetahui siapa yang layak menerima pusaka mengikut hukum faraid yang sebenar.</p>
+    </div>
+    <div class="benefit-card anim" style="transition-delay:.08s">
+      <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div>
+      <h3>Fahami Anggaran Pembahagian</h3>
+      <p>Memberikan gambaran awal tentang anggaran bahagian setiap waris mengikut prinsip Faraid.</p>
+    </div>
+    <div class="benefit-card anim" style="transition-delay:.16s">
+      <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></div>
+      <h3>Susun Maklumat Aset dan Hutang</h3>
+      <p>Membantu menghimpunkan maklumat aset, pembiayaan, hutang dan tanggungan secara teratur dan menyeluruh.</p>
+    </div>
+    <div class="benefit-card anim" style="transition-delay:.24s">
+      <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+      <h3>Kurangkan Kekeliruan Keluarga</h3>
+      <p>Membantu ahli keluarga memahami kedudukan pusaka dan langkah yang perlu diambil seterusnya.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RISKS -->
+<section class="sec sec--dark">
+  <div class="risks-wrap">
+    <div class="centered anim">
+      <p class="sec-label" style="color:var(--gold-light)">Risiko</p>
+      <h2 class="sec-title sec-title--white">Tanpa Persediaan yang Teratur...</h2>
+      <p class="sec-sub sec-sub--white" style="margin-bottom:2rem">Keluarga mungkin terdedah kepada masalah-masalah berikut:</p>
+    </div>
+    <div class="risks-grid anim">
+      <div class="risk-card"><div class="risk-x"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div><span>Waris Tidak Dikenal Pasti</span></div>
+      <div class="risk-card"><div class="risk-x"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div><span>Aset atau Hutang Tertinggal</span></div>
+      <div class="risk-card"><div class="risk-x"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div><span>Dokumen Tidak Lengkap</span></div>
+      <div class="risk-card"><div class="risk-x"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div><span>Salah Faham Pembahagian</span></div>
+      <div class="risk-card"><div class="risk-x"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div><span>Urusan Pusaka Tertangguh</span></div>
+      <div class="risk-card"><div class="risk-x"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div><span>Pertikaian dalam Keluarga</span></div>
+    </div>
+    <p class="risks-note anim">Persediaan yang lebih jelas membantu urusan pusaka dimulakan dengan lebih teratur dan mengurangkan beban yang ditanggung oleh waris.</p>
+  </div>
+</section>
+
+<!-- PROSES SMARTFARAID -->
+<section class="sec" id="proses">
+  <div class="centered anim">
+    <p class="sec-label">Cara Kerja</p>
+    <h2 class="sec-title">Proses SmartFaraid</h2>
+    <p class="sec-sub centered">Proses mudah dan berfungsi dalam 4 langkah — dari penyerahan maklumat hingga terima rumusan lengkap.</p>
+  </div>
+  <div class="process-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); max-width:880px; margin: 0 auto;">
+    <div class="process-step anim">
+      <div class="process-num">1</div>
+      <h3>Berikan Maklumat</h3>
+      <p>Kongsikan maklumat keluarga, aset, hutang dan tanggungan yang berkaitan.</p>
+    </div>
+    <div class="process-step anim" style="transition-delay:.1s">
+      <div class="process-num">2</div>
+      <h3>Semakan Waris &amp; Aset</h3>
+      <p>Maklumat akan disemak untuk mengenal pasti waris serta kedudukan harta pusaka.</p>
+    </div>
+    <div class="process-step anim" style="transition-delay:.2s">
+      <div class="process-num">3</div>
+      <h3>Analisis Pembahagian</h3>
+      <p>Anggaran pembahagian Faraid disediakan berdasarkan maklumat yang diberikan.</p>
+    </div>
+    <div class="process-step anim" style="transition-delay:.3s">
+      <div class="process-num">4</div>
+      <h3>Terima Rumusan</h3>
+      <p>Terima ringkasan lengkap waris, aset, liabiliti dan pembahagian pusaka secara teratur.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section class="sec sec--alt">
+  <div class="centered anim">
+    <p class="sec-label">Sasaran</p>
+    <h2 class="sec-title">Untuk Siapa?</h2>
+    <p class="sec-sub centered">Sesuai untuk individu dan keluarga Muslim yang memerlukan kejelasan berkaitan harta pusaka.</p>
+  </div>
+  <div class="audience-grid">
+    <div class="audience-card anim">
+      <div class="audience-icon"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+      <h3>Individu Muslim</h3>
+      <p>Memahami pembahagian Faraid</p>
+    </div>
+    <div class="audience-card anim" style="transition-delay:.07s">
+      <div class="audience-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+      <h3>Keluarga Beraset</h3>
+      <p>Dengan beberapa orang waris</p>
+    </div>
+    <div class="audience-card anim" style="transition-delay:.14s">
+      <div class="audience-icon"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
+      <h3>Pemilik Aset</h3>
+      <p>Rumah, tanah, simpanan atau pelaburan</p>
+    </div>
+    <div class="audience-card anim" style="transition-delay:.21s">
+      <div class="audience-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div>
+      <h3>Waris</h3>
+      <p>Membuat persediaan urusan pusaka</p>
+    </div>
+    <div class="audience-card anim" style="transition-delay:.28s">
+      <div class="audience-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></div>
+      <h3>Perancang Harta</h3>
+      <p>Melengkapkan Wasiat atau Hibah</p>
+    </div>
+  </div>
+</section>
+
+<!-- DOCUMENTS -->
+<section class="sec" id="dokumen">
+  <div class="centered anim">
+    <p class="sec-label">Persediaan</p>
+    <h2 class="sec-title">Dokumen Asas yang Diperlukan</h2>
+    <p class="sec-sub centered">Sediakan dokumen berikut sebelum memulakan proses SmartFaraid anda.</p>
+  </div>
+  <div class="docs-grid">
+    <div class="doc-card anim"><h3>Dokumen Pengenalan</h3><p>MyKad pemilik harta atau si mati serta waris yang berkaitan.</p></div>
+    <div class="doc-card anim" style="transition-delay:.08s"><h3>Dokumen Keluarga</h3><p>Sijil perkahwinan, sijil kelahiran dan dokumen hubungan kekeluargaan.</p></div>
+    <div class="doc-card anim" style="transition-delay:.16s"><h3>Dokumen Aset</h3><p>Maklumat hartanah, akaun bank, pelaburan, kenderaan atau perniagaan.</p></div>
+    <div class="doc-card anim" style="transition-delay:.24s"><h3>Dokumen Liabiliti</h3><p>Maklumat pembiayaan, pinjaman, hutang dan tanggungan yang berkaitan.</p></div>
+  </div>
+  <p class="docs-note anim">Senarai dokumen lengkap akan diberikan berdasarkan keadaan keluarga dan jenis aset anda.</p>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec--alt" id="faq">
+  <div class="centered anim">
+    <p class="sec-label">Soalan Lazim</p>
+    <h2 class="sec-title">FAQ SmartFaraid</h2>
+    <p class="sec-sub centered" style="margin-bottom:2.5rem">Jawapan kepada soalan-soalan yang kerap ditanya.</p>
+  </div>
+  <div class="faq-list anim">
+    <div class="faq-item">
+      <button class="faq-q">Apakah itu Sijil Faraid?<svg viewBox="0 0 24 24"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+      <div class="faq-a">Sijil Faraid ialah dokumen rasmi yang dikeluarkan oleh Mahkamah Syariah bagi mengesahkan waris yang berhak menerima pusaka serta bahagian masing-masing mengikut Hukum Faraid.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Adakah SmartFaraid membuat permohonan bagi pihak saya?<svg viewBox="0 0 24 24"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+      <div class="faq-a">SmartFaraid memberi tumpuan kepada penyediaan dokumentasi. Pengguna boleh membuat permohonan sendiri atau melantik Panel Profesional SmartWills untuk bantuan lanjut dalam proses permohonan.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Adakah semua harta tertakluk kepada Faraid?<svg viewBox="0 0 24 24"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+      <div class="faq-a">Tidak semestinya. Harta yang mempunyai penama seperti KWSP, insurans, dan Tabung Haji mungkin tidak termasuk dalam harta pusaka Faraid secara automatik. Namun, Majlis Fatwa Kebangsaan telah memutuskan bahawa penama KWSP hanyalah pentadbir — wang KWSP tetap perlu dibahagikan secara Faraid. Setiap kes berbeza dan nasihat Peguam Syarie adalah disyorkan.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Bolehkah waris bersetuju untuk membahagi sama rata?<svg viewBox="0 0 24 24"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+      <div class="faq-a">Ya. Ini dikenali sebagai Takharuj atau Sulh (perundingan/perdamaian). Selepas bahagian Faraid dikira dan semua waris mengetahui hak masing-masing, mereka boleh secara sukarela bersetuju untuk membahagikan harta secara berbeza. Syaratnya: semua waris mesti bersetuju tanpa sebarang paksaan dan dalam keadaan memahami hak masing-masing.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Berapa lama proses ini mengambil masa?<svg viewBox="0 0 24 24"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+      <div class="faq-a">Tempoh bergantung kepada kelengkapan dokumen dan proses pihak berkuasa yang berkaitan. Harta pusaka kecil boleh diselesaikan dalam beberapa bulan, manakala kes yang melibatkan hartanah atau pertikaian mungkin mengambil masa lebih lama.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Adakah SmartFaraid membahagikan harta pusaka?<svg viewBox="0 0 24 24"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+      <div class="faq-a">Tidak. SmartFaraid memberi tumpuan kepada penyediaan dokumentasi bagi tujuan permohonan Sijil Faraid. Pembahagian harta pusaka yang sebenar memerlukan proses mahkamah atau pihak berkuasa yang berkaitan.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Adakah semua waris perlu memberikan maklumat?<svg viewBox="0 0 24 24"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+      <div class="faq-a">Maklumat yang diperlukan bergantung kepada keadaan setiap kes dan keperluan yang berkaitan. Pasukan SmartFaraid akan membimbing anda mengenai maklumat yang diperlukan berdasarkan situasi keluarga anda.</div>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:1.5rem;" class="anim">
+    <p style="font-size:.82rem; color:var(--muted); max-width:620px; margin:0 auto; line-height:1.7; padding: 1rem 1.5rem; background:var(--white); border-radius:var(--radius); border:1px solid var(--border);">
+      <strong style="color:var(--green)">Penafian:</strong> Kalkulator dan panduan ini adalah untuk tujuan pendidikan dan memberikan anggaran berdasarkan Mazhab Syafi'i yang diamalkan di Malaysia. Kes-kes rumit yang melibatkan datuk, saudara-mara (Kalalah), atau isteri berbilang hendaklah dirujuk kepada Peguam Syarie bertauliah atau unit pusaka di institusi seperti Amanah Raya atau Baitulmal.
+    </p>
+  </div>
+</section>
+
+<!-- KALKULATOR PROMO -->
+<section class="calc-promo">
+  <h2 class="anim">Cuba Kalkulator Faraid Kami<br />Secara Percuma</h2>
+  <p class="anim">Masukkan maklumat waris dan nilai harta — dapatkan anggaran pembahagian secara segera.</p>
+  <div class="calc-promo__btns anim">
+    <a class="btn-gold-solid" href="smartfaraid-kalkulator.html">Buka Kalkulator Faraid</a>
+    <a class="btn-outline-white" href="https://app.mysmartwills.com/portal/?company_id=4">Mohon SmartFaraid</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <div class="footer__brand-row">
+        <div class="nav__mark"><svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:white"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+        <span class="footer__brand-name">SmartFaraid</span>
+      </div>
+      <p>Perkhidmatan Faraid digital yang mudah, pantas dan sah. Oleh WasiatKu Fintech Sdn. Bhd. (202301043968)</p>
+    </div>
+    <div class="footer__col">
+      <h4>Panduan</h4>
+      <ul>
+        <li><a href="#kenapa">Mengapa Faraid?</a></li>
+        <li><a href="#sebelum">Sebelum Pembahagian</a></li>
+        <li><a href="#waris">Jenis Waris</a></li>
+        <li><a href="#pengiraan">Kaedah Pengiraan</a></li>
+        <li><a href="smartfaraid-kalkulator.html">Kalkulator Faraid</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>SmartFaraid</h4>
+      <ul>
+        <li><a href="#apaitusf">Apakah SmartFaraid?</a></li>
+        <li><a href="#proses">Proses Kami</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="https://wasiatku.com.my">WasiatKu</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Hubungi Kami</h4>
+      <ul>
+        <li><a href="tel:+60182209929">+6018-220 9929</a></li>
+        <li><a href="mailto:enquiry@wasiatku.com.my">enquiry@wasiatku.com.my</a></li>
+        <li><a href="http://wa.me/60182209929">WhatsApp</a></li>
+        <li><a href="https://maps.app.goo.gl/bdPqnX4pgEkWG3TC8">Ibu Pejabat KL</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© 2023–2026 All rights reserved | WasiatKu.com.my</span>
+    <div class="footer__socials">
+      <a href="https://www.facebook.com/wasiatku.com.my/" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="https://www.instagram.com/wasiatku.com.my" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="rgba(255,255,255,.7)" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="rgba(255,255,255,.7)" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="rgba(255,255,255,.7)"/></svg></a>
+      <a href="https://www.youtube.com/channel/UC4sIsrzxOq_4FgoPdi-83Rw" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobMenu').classList.toggle('open');
+  });
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+    document.querySelectorAll('.anim').forEach(el => obs.observe(el));
+  } else {
+    document.querySelectorAll('.anim').forEach(el => el.classList.add('visible'));
+  }
+</script>
+</body>
+</html>

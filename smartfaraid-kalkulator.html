@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalkulator Faraid – SmartFaraid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:       #004F38;
+      --green-dark:  #003A28;
+      --green-md:    #005f45;
+      --gold:        #C89D48;
+      --gold-light:  #DEAF5F;
+      --gold-dark:   #B0892E;
+      --gold-pale:   #f5ead4;
+      --cream:       #faf7f2;
+      --white:       #ffffff;
+      --text:        #1a1a1a;
+      --muted:       #5a6e64;
+      --border:      #dae5de;
+      --danger:      #c0453a;
+      --radius:      12px;
+      --radius-lg:   20px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; color: var(--text); background: var(--cream); line-height: 1.6; }
+
+    /* ── NAV (shared) ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+      box-shadow: 0 2px 16px rgba(0,0,0,.28);
+    }
+    .nav__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav__mark {
+      width: 38px; height: 38px; border-radius: 9px;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+      display: grid; place-items: center;
+    }
+    .nav__mark svg { width: 22px; height: 22px; fill: var(--white); }
+    .nav__name { color: var(--white); font-weight: 700; font-size: 1.05rem; line-height: 1.1; }
+    .nav__name span { display: block; font-size: .62rem; font-weight: 400; opacity: .65; letter-spacing: .07em; text-transform: uppercase; }
+    .nav__links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav__links a { color: rgba(255,255,255,.8); text-decoration: none; font-size: .855rem; transition: color .2s; }
+    .nav__links a:hover, .nav__links a.active { color: var(--gold-light); }
+    .nav__btn {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+      color: var(--white); padding: .48rem 1.2rem; border-radius: 8px;
+      font-size: .855rem; font-weight: 600; text-decoration: none; transition: opacity .2s;
+    }
+    .nav__btn:hover { opacity: .88; }
+    .nav__burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav__burger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+    .mob-menu { display: none; flex-direction: column; background: var(--green-dark); padding: 1rem 5% 1.5rem; gap: .7rem; }
+    .mob-menu a { color: rgba(255,255,255,.82); text-decoration: none; font-size: .9rem; padding: .4rem 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .mob-menu .nav__btn { display: inline-block; margin-top: .4rem; text-align: center; border: none; }
+    .mob-menu.open { display: flex; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 60%, #006649 100%);
+      padding: 3.5rem 5% 2.75rem; text-align: center;
+    }
+    .page-hero__tag {
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: rgba(200,157,72,.18); color: var(--gold-light);
+      padding: .3rem .85rem; border-radius: 20px;
+      font-size: .73rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .page-hero__tag::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--gold-light); }
+    .page-hero h1 { font-size: clamp(1.6rem, 3.6vw, 2.4rem); font-weight: 800; color: var(--white); margin-bottom: .75rem; }
+    .page-hero h1 em { color: var(--gold-light); font-style: normal; }
+    .page-hero p { color: rgba(255,255,255,.72); max-width: 560px; margin: 0 auto; font-size: .9rem; line-height: 1.7; }
+
+    /* ── LAYOUT ── */
+    .calc-wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 5% 5rem; display: grid; grid-template-columns: 1.15fr .85fr; gap: 2rem; align-items: start; }
+
+    .panel {
+      background: var(--white); border-radius: var(--radius-lg);
+      border: 1px solid var(--border); padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,79,56,.06);
+    }
+    .panel + .panel { margin-top: 1.5rem; }
+    .panel h2 {
+      font-size: 1.05rem; font-weight: 700; color: var(--green); margin-bottom: .3rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .panel h2 .step-badge {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+      color: var(--white); font-size: .78rem; font-weight: 800;
+      display: grid; place-items: center; flex-shrink: 0;
+    }
+    .panel__sub { font-size: .82rem; color: var(--muted); margin-bottom: 1.5rem; padding-left: 36px; }
+
+    .field-group { margin-bottom: 1.1rem; }
+    .field-group:last-child { margin-bottom: 0; }
+    label { display: block; font-size: .82rem; font-weight: 600; color: var(--text); margin-bottom: .4rem; }
+    .field-hint { font-size: .74rem; color: var(--muted); margin-top: .3rem; }
+
+    input[type="number"], input[type="text"], select {
+      width: 100%; padding: .65rem .85rem; border: 1.5px solid var(--border);
+      border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: .88rem; color: var(--text);
+      background: var(--white); transition: border-color .2s;
+    }
+    input:focus, select:focus { outline: none; border-color: var(--gold); }
+    .input-prefix { position: relative; }
+    .input-prefix span { position: absolute; left: .85rem; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: .85rem; font-weight: 600; }
+    .input-prefix input { padding-left: 2.4rem; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .85rem; }
+
+    /* toggle switch row */
+    .toggle-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .85rem 1rem; background: var(--cream); border-radius: 8px;
+      margin-bottom: .65rem;
+    }
+    .toggle-row:last-child { margin-bottom: 0; }
+    .toggle-row__label { font-size: .85rem; font-weight: 500; color: var(--text); }
+    .toggle-row__label small { display: block; font-size: .72rem; color: var(--muted); font-weight: 400; margin-top: 2px; }
+    .switch { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; inset: 0; background: #ccd6d0; border-radius: 24px; transition: .25s; }
+    .slider::before { content:''; position: absolute; width: 18px; height: 18px; left: 3px; bottom: 3px; background: var(--white); border-radius: 50%; transition: .25s; }
+    .switch input:checked + .slider { background: var(--green); }
+    .switch input:checked + .slider::before { transform: translateX(20px); }
+
+    /* count stepper */
+    .stepper { display: flex; align-items: center; gap: .6rem; }
+    .stepper button {
+      width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid var(--border);
+      background: var(--white); color: var(--green); font-size: 1rem; font-weight: 700;
+      cursor: pointer; display: grid; place-items: center; transition: background .2s, border-color .2s;
+    }
+    .stepper button:hover { background: var(--gold-pale); border-color: var(--gold); }
+    .stepper span { min-width: 28px; text-align: center; font-weight: 700; color: var(--text); font-size: .95rem; }
+
+    .heir-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .85rem 1rem; background: var(--cream); border-radius: 8px; margin-bottom: .65rem;
+      gap: 1rem;
+    }
+    .heir-row:last-child { margin-bottom: 0; }
+    .heir-row__label { font-size: .85rem; font-weight: 500; color: var(--text); flex: 1; }
+    .heir-row__label small { display: block; font-size: .72rem; color: var(--muted); font-weight: 400; margin-top: 2px; }
+
+    .section-divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+
+    .btn-calc {
+      width: 100%; padding: .95rem; border-radius: 10px; border: none;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+      color: var(--white); font-weight: 700; font-size: .95rem; cursor: pointer;
+      transition: opacity .2s, transform .15s; margin-top: .5rem;
+    }
+    .btn-calc:hover { opacity: .92; transform: translateY(-1px); }
+    .btn-reset {
+      width: 100%; padding: .8rem; border-radius: 10px; border: 1.5px solid var(--border);
+      background: var(--white); color: var(--muted); font-weight: 600; font-size: .85rem; cursor: pointer;
+      margin-top: .65rem; transition: border-color .2s, color .2s;
+    }
+    .btn-reset:hover { border-color: var(--green); color: var(--green); }
+
+    /* ── RESULTS ── */
+    .results-sticky { position: sticky; top: 84px; }
+    .result-empty {
+      text-align: center; padding: 3rem 1.5rem; color: var(--muted);
+    }
+    .result-empty svg { width: 56px; height: 56px; fill: var(--border); margin-bottom: 1rem; }
+    .result-empty p { font-size: .85rem; line-height: 1.7; }
+
+    .net-estate-box {
+      background: linear-gradient(145deg, var(--green-dark), var(--green));
+      border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; color: var(--white);
+    }
+    .net-estate-box h4 { font-size: .73rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--gold-light); margin-bottom: .5rem; }
+    .net-estate-box .amount { font-size: 1.6rem; font-weight: 800; }
+    .net-estate-box .breakdown { margin-top: .85rem; padding-top: .85rem; border-top: 1px solid rgba(255,255,255,.15); display: flex; flex-direction: column; gap: .35rem; }
+    .net-estate-box .breakdown div { display: flex; justify-content: space-between; font-size: .76rem; color: rgba(255,255,255,.7); }
+    .net-estate-box .breakdown span:last-child { color: rgba(255,255,255,.92); font-weight: 600; }
+
+    .aul-flag {
+      background: #fff4e0; border: 1.5px solid var(--gold); border-radius: 8px;
+      padding: .75rem 1rem; margin-bottom: 1.25rem; font-size: .78rem; color: #6b5421; line-height: 1.6;
+    }
+    .aul-flag strong { color: var(--gold-dark); }
+
+    .result-table { width: 100%; border-collapse: collapse; margin-bottom: .5rem; }
+    .result-table th { text-align: left; font-size: .7rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); padding: .5rem .4rem; border-bottom: 2px solid var(--border); }
+    .result-table th:last-child, .result-table td:last-child { text-align: right; }
+    .result-table td { padding: .65rem .4rem; border-bottom: 1px solid var(--border); font-size: .85rem; }
+    .result-table tr:last-child td { border-bottom: none; }
+    .result-table .heir-name { font-weight: 600; color: var(--green); }
+    .result-table .heir-meta { font-size: .72rem; color: var(--muted); display: block; margin-top: 1px; }
+    .result-table .frac-pill {
+      display: inline-block; background: var(--gold-pale); color: var(--gold-dark);
+      font-weight: 700; font-size: .78rem; padding: .2rem .55rem; border-radius: 12px;
+    }
+    .result-table .rm-amount { font-weight: 700; color: var(--text); }
+
+    .no-residue-note {
+      background: var(--cream); border-radius: 8px; padding: .85rem 1rem; margin-top: 1rem;
+      font-size: .78rem; color: var(--muted); line-height: 1.6;
+    }
+    .baitulmal-note {
+      background: #fdeeee; border: 1.5px solid var(--danger); border-radius: 8px;
+      padding: .85rem 1rem; margin-top: 1rem; font-size: .8rem; color: #8a2f27; line-height: 1.65;
+    }
+
+    .disclaimer-box {
+      margin-top: 1.5rem; font-size: .74rem; color: var(--muted); line-height: 1.7;
+      background: var(--cream); border-radius: 8px; padding: .9rem 1rem;
+    }
+    .disclaimer-box strong { color: var(--green); }
+
+    /* ── FOOTER (compact) ── */
+    .footer { background: var(--green-dark); color: rgba(255,255,255,.62); padding: 2rem 5%; text-align: center; font-size: .8rem; }
+    .footer a { color: var(--gold-light); text-decoration: none; }
+
+    @media (max-width: 900px) {
+      .calc-wrap { grid-template-columns: 1fr; }
+      .results-sticky { position: static; }
+    }
+    @media (max-width: 768px) {
+      .nav__links, .nav__btn { display: none; }
+      .nav__burger { display: flex; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .panel { padding: 1.5rem; }
+      .grid-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav__brand" href="home.html">
+    <div class="nav__mark"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+    <span class="nav__name">SmartFaraid <span>by SmartWills</span></span>
+  </a>
+  <ul class="nav__links">
+    <li><a href="home.html">Laman Utama</a></li>
+    <li><a href="smartfaraid-info.html">Panduan</a></li>
+    <li><a href="smartfaraid-info.html#faq">FAQ</a></li>
+    <li><a href="smartfaraid-kalkulator.html" class="active">Kalkulator</a></li>
+  </ul>
+  <a class="nav__btn" href="https://app.mysmartwills.com/portal/?company_id=4">Mohon Sekarang</a>
+  <button class="nav__burger" id="hamburger" aria-label="Buka menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="home.html">Laman Utama</a>
+  <a href="smartfaraid-info.html">Panduan</a>
+  <a href="smartfaraid-info.html#faq">FAQ</a>
+  <a href="smartfaraid-kalkulator.html">Kalkulator</a>
+  <a class="nav__btn" href="https://app.mysmartwills.com/portal/?company_id=4">Mohon Sekarang</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero__tag">Alat Percuma</div>
+  <h1>Kalkulator <em>Faraid</em></h1>
+  <p>Masukkan nilai harta dan maklumat waris untuk dapatkan anggaran pembahagian pusaka mengikut Mazhab Syafi'i. Untuk tujuan rujukan dan pendidikan sahaja.</p>
+</section>
+
+<!-- CALCULATOR -->
+<div class="calc-wrap">
+
+  <!-- LEFT: FORM -->
+  <div>
+    <!-- STEP 1: ESTATE -->
+    <div class="panel">
+      <h2><span class="step-badge">1</span> Nilai Harta Pusaka</h2>
+      <p class="panel__sub">Masukkan jumlah harta kasar dan tanggungan yang perlu diselesaikan terlebih dahulu.</p>
+
+      <div class="field-group">
+        <label for="grossEstate">Jumlah Harta Kasar (RM)</label>
+        <div class="input-prefix"><span>RM</span><input type="number" id="grossEstate" min="0" step="100" placeholder="0" value="1000000" /></div>
+        <p class="field-hint">Jumlah keseluruhan aset si mati sebelum sebarang potongan.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="field-group">
+          <label for="funeralCost">Kos Jenazah (RM)</label>
+          <div class="input-prefix"><span>RM</span><input type="number" id="funeralCost" min="0" step="50" placeholder="0" value="5000" /></div>
+        </div>
+        <div class="field-group">
+          <label for="debts">Hutang Si Mati (RM)</label>
+          <div class="input-prefix"><span>RM</span><input type="number" id="debts" min="0" step="100" placeholder="0" value="20000" /></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field-group">
+          <label for="harta SepenCarian">Harta Sepencarian (RM)</label>
+          <div class="input-prefix"><span>RM</span><input type="number" id="sepencarian" min="0" step="100" placeholder="0" value="0" /></div>
+          <p class="field-hint">Bahagian pasangan hidup, diasingkan dahulu.</p>
+        </div>
+        <div class="field-group">
+          <label for="wasiat">Wasiat (RM, maks. 1/3 baki)</label>
+          <div class="input-prefix"><span>RM</span><input type="number" id="wasiat" min="0" step="100" placeholder="0" value="0" /></div>
+          <p class="field-hint">Akan dihadkan automatik kepada 1/3 jika melebihi.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: SPOUSE & PARENTS -->
+    <div class="panel">
+      <h2><span class="step-badge">2</span> Pasangan & Ibu Bapa</h2>
+      <p class="panel__sub">Nyatakan waris yang masih hidup daripada kategori ini.</p>
+
+      <div class="toggle-row">
+        <div class="toggle-row__label">Si mati lelaki, mempunyai isteri hidup<small>Sehingga 4 isteri (poligami) jika berkenaan</small></div>
+        <label class="switch"><input type="checkbox" id="hasWife"><span class="slider"></span></label>
+      </div>
+      <div class="toggle-row" id="wifeCountRow" style="display:none">
+        <div class="toggle-row__label">Bilangan Isteri</div>
+        <div class="stepper">
+          <button type="button" data-step="-1" data-target="wifeCount">−</button>
+          <span id="wifeCountVal">1</span>
+          <button type="button" data-step="1" data-target="wifeCount">+</button>
+        </div>
+      </div>
+      <div class="toggle-row">
+        <div class="toggle-row__label">Si mati perempuan, mempunyai suami hidup</div>
+        <label class="switch"><input type="checkbox" id="hasHusband"><span class="slider"></span></label>
+      </div>
+      <div class="toggle-row">
+        <div class="toggle-row__label">Ibu masih hidup</div>
+        <label class="switch"><input type="checkbox" id="hasMother"><span class="slider"></span></label>
+      </div>
+      <div class="toggle-row">
+        <div class="toggle-row__label">Bapa masih hidup</div>
+        <label class="switch"><input type="checkbox" id="hasFather"><span class="slider"></span></label>
+      </div>
+      <div class="toggle-row" id="grandparentRow">
+        <div class="toggle-row__label">Datuk sebelah bapa hidup<small>Hanya relevan jika bapa telah meninggal</small></div>
+        <label class="switch"><input type="checkbox" id="hasGrandfather"><span class="slider"></span></label>
+      </div>
+      <div class="toggle-row" id="grandmotherRow">
+        <div class="toggle-row__label">Nenek (sebelah ibu/bapa) hidup<small>Hanya relevan jika ibu telah meninggal</small></div>
+        <label class="switch"><input type="checkbox" id="hasGrandmother"><span class="slider"></span></label>
+      </div>
+    </div>
+
+    <!-- STEP 3: CHILDREN -->
+    <div class="panel">
+      <h2><span class="step-badge">3</span> Anak-anak</h2>
+      <p class="panel__sub">Bilangan anak kandung si mati yang masih hidup.</p>
+      <div class="heir-row">
+        <div class="heir-row__label">Anak Lelaki<small>Asabah — penerima baki</small></div>
+        <div class="stepper">
+          <button type="button" data-step="-1" data-target="sonCount">−</button>
+          <span id="sonCountVal">0</span>
+          <button type="button" data-step="1" data-target="sonCount">+</button>
+        </div>
+      </div>
+      <div class="heir-row">
+        <div class="heir-row__label">Anak Perempuan<small>1/2 (seorang) atau 2/3 (ramai), jika tiada anak lelaki</small></div>
+        <div class="stepper">
+          <button type="button" data-step="-1" data-target="daughterCount">−</button>
+          <span id="daughterCountVal">2</span>
+          <button type="button" data-step="1" data-target="daughterCount">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: SIBLINGS (KALALAH) -->
+    <div class="panel">
+      <h2><span class="step-badge">4</span> Saudara-mara (Kalalah)</h2>
+      <p class="panel__sub">Hanya relevan jika si mati tiada anak <em>dan</em> tiada bapa/datuk hidup.</p>
+      <div class="heir-row">
+        <div class="heir-row__label">Saudara Lelaki Seibu-sebapa<small>Asabah jika tiada anak &amp; bapa</small></div>
+        <div class="stepper">
+          <button type="button" data-step="-1" data-target="fullBrotherCount">−</button>
+          <span id="fullBrotherCountVal">0</span>
+          <button type="button" data-step="1" data-target="fullBrotherCount">+</button>
+        </div>
+      </div>
+      <div class="heir-row">
+        <div class="heir-row__label">Saudara Perempuan Seibu-sebapa<small>1/2 (seorang) atau 2/3 (ramai), jika tiada saudara lelaki</small></div>
+        <div class="stepper">
+          <button type="button" data-step="-1" data-target="fullSisterCount">−</button>
+          <span id="fullSisterCountVal">0</span>
+          <button type="button" data-step="1" data-target="fullSisterCount">+</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-calc" id="calcBtn">Kira Pembahagian Faraid</button>
+    <button class="btn-reset" id="resetBtn">Set Semula Borang</button>
+  </div>
+
+  <!-- RIGHT: RESULTS -->
+  <div class="results-sticky">
+    <div class="panel" id="resultsPanel">
+      <h2 style="margin-bottom:1rem">Anggaran Pembahagian</h2>
+      <div id="resultsContent">
+        <div class="result-empty">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+          <p>Lengkapkan maklumat di sebelah kiri dan klik "Kira Pembahagian Faraid" untuk melihat anggaran bahagian setiap waris.</p>
+        </div>
+      </div>
+      <div class="disclaimer-box">
+        <strong>Penafian:</strong> Kalkulator ini memberikan anggaran berdasarkan Mazhab Syafi'i yang diamalkan di Malaysia, untuk tujuan pendidikan sahaja. Kes yang melibatkan datuk/nenek, kalalah kompleks, atau isteri berbilang perlu disahkan oleh Peguam Syarie bertauliah atau institusi seperti Amanah Raya / Baitulmal.
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>© 2023–2026 WasiatKu Fintech Sdn. Bhd. (202301043968) · <a href="home.html">SmartFaraid</a> · <a href="http://wa.me/60182209929">Hubungi Kami</a></p>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobMenu').classList.toggle('open');
+  });
+
+  // toggle wife count row visibility
+  const hasWife = document.getElementById('hasWife');
+  const wifeCountRow = document.getElementById('wifeCountRow');
+  hasWife.addEventListener('change', () => { wifeCountRow.style.display = hasWife.checked ? 'flex' : 'none'; });
+
+  // steppers
+  const counters = { wifeCount: 1, sonCount: 0, daughterCount: 2, fullBrotherCount: 0, fullSisterCount: 0 };
+  document.querySelectorAll('.stepper button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.target;
+      const step = parseInt(btn.dataset.step, 10);
+      let val = counters[target] + step;
+      const min = target === 'wifeCount' ? 1 : 0;
+      const max = target === 'wifeCount' ? 4 : 20;
+      val = Math.max(min, Math.min(max, val));
+      counters[target] = val;
+      document.getElementById(target + 'Val').textContent = val;
+    });
+  });
+
+  function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+  function lcm(a, b) { return (a * b) / gcd(a, b); }
+
+  function fmtMoney(n) {
+    return 'RM ' + n.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function fracLabel(num, den) {
+    if (num === 0) return '0';
+    const g = gcd(num, den);
+    const n = num / g, d = den / g;
+    return d === 1 ? `${n}` : `${n}/${d}`;
+  }
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    document.querySelectorAll('input[type="number"]').forEach(i => i.value = i.id === 'grossEstate' ? 1000000 : (i.id === 'funeralCost' ? 5000 : (i.id === 'debts' ? 20000 : 0)));
+    document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
+    wifeCountRow.style.display = 'none';
+    Object.assign(counters, { wifeCount: 1, sonCount: 0, daughterCount: 2, fullBrotherCount: 0, fullSisterCount: 0 });
+    Object.keys(counters).forEach(k => document.getElementById(k + 'Val').textContent = counters[k]);
+    document.getElementById('resultsContent').innerHTML = `
+      <div class="result-empty">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+        <p>Lengkapkan maklumat di sebelah kiri dan klik "Kira Pembahagian Faraid" untuk melihat anggaran bahagian setiap waris.</p>
+      </div>`;
+  });
+
+  document.getElementById('calcBtn').addEventListener('click', calculateFaraid);
+
+  function calculateFaraid() {
+    const gross = parseFloat(document.getElementById('grossEstate').value) || 0;
+    const funeral = parseFloat(document.getElementById('funeralCost').value) || 0;
+    const debts = parseFloat(document.getElementById('debts').value) || 0;
+    const sepencarian = parseFloat(document.getElementById('sepencarian').value) || 0;
+    let wasiatInput = parseFloat(document.getElementById('wasiat').value) || 0;
+
+    const afterFuneralDebt = Math.max(0, gross - funeral - debts - sepencarian);
+    const maxWasiat = afterFuneralDebt / 3;
+    const wasiatUsed = Math.min(wasiatInput, maxWasiat);
+    const netEstate = Math.max(0, afterFuneralDebt - wasiatUsed);
+
+    const hasWifeC = document.getElementById('hasWife').checked;
+    const wifeCount = counters.wifeCount;
+    const hasHusbandC = document.getElementById('hasHusband').checked;
+    const hasMother = document.getElementById('hasMother').checked;
+    const hasFather = document.getElementById('hasFather').checked;
+    const hasGrandfather = document.getElementById('hasGrandfather').checked && !hasFather;
+    const hasGrandmother = document.getElementById('hasGrandmother').checked && !hasMother;
+    const sons = counters.sonCount;
+    const daughters = counters.daughterCount;
+    const hasChildren = sons > 0 || daughters > 0;
+    const fullBrothers = hasChildren || hasFather ? 0 : counters.fullBrotherCount;
+    const fullSisters = hasChildren || hasFather ? 0 : counters.fullSisterCount;
+
+    // Use a common denominator approach. Start with 24 (covers 1/2,1/3,1/4,1/6,1/8,2/3)
+    let DEN = 24;
+    const shares = []; // {name, meta, num, den, isResidue}
+
+    // Spouse
+    if (hasHusbandC) {
+      const num = hasChildren ? DEN / 4 : DEN / 2;
+      shares.push({ key: 'husband', name: 'Suami', meta: hasChildren ? 'Ada anak — 1/4' : 'Tiada anak — 1/2', num, den: DEN, type: 'fixed' });
+    }
+    if (hasWifeC) {
+      const totalNum = hasChildren ? DEN / 8 : DEN / 4;
+      const each = totalNum / wifeCount;
+      for (let i = 1; i <= wifeCount; i++) {
+        shares.push({ key: 'wife' + i, name: wifeCount > 1 ? `Isteri ${i}` : 'Isteri', meta: hasChildren ? `Ada anak — 1/8 dikongsi ${wifeCount} isteri` : `Tiada anak — 1/4 dikongsi ${wifeCount} isteri`, num: each, den: DEN, type: 'fixed' });
+      }
+    }
+
+    // Mother
+    let motherNum = 0;
+    if (hasMother) {
+      const manyBro = (fullBrothers + fullSisters) >= 2 || hasChildren ? false : false; // simplified condition below
+      if (hasChildren || (fullBrothers + fullSisters) >= 2) {
+        motherNum = DEN / 6;
+        shares.push({ key: 'mother', name: 'Ibu', meta: 'Ada anak / 2+ adik-beradik — 1/6', num: motherNum, den: DEN, type: 'fixed' });
+      } else {
+        motherNum = DEN / 3;
+        shares.push({ key: 'mother', name: 'Ibu', meta: 'Tiada anak, kurang 2 adik-beradik — 1/3', num: motherNum, den: DEN, type: 'fixed' });
+      }
+    }
+
+    // Father
+    let fatherIsAsabahOnly = false;
+    if (hasFather) {
+      if (sons > 0) {
+        shares.push({ key: 'father', name: 'Bapa', meta: 'Ada anak lelaki — 1/6', num: DEN / 6, den: DEN, type: 'fixed' });
+      } else if (daughters > 0) {
+        shares.push({ key: 'father', name: 'Bapa', meta: 'Ada anak perempuan sahaja — 1/6 + Asabah', num: DEN / 6, den: DEN, type: 'fixed-plus-residue', residueKey: 'father' });
+      } else {
+        fatherIsAsabahOnly = true;
+        shares.push({ key: 'father', name: 'Bapa', meta: 'Tiada anak — Asabah (baki)', num: 0, den: DEN, type: 'residue-only', residueKey: 'father' });
+      }
+    } else if (hasGrandfather) {
+      if (sons > 0) {
+        shares.push({ key: 'grandfather', name: 'Datuk', meta: 'Ada anak lelaki — 1/6', num: DEN / 6, den: DEN, type: 'fixed' });
+      } else if (daughters > 0) {
+        shares.push({ key: 'grandfather', name: 'Datuk', meta: 'Ada anak perempuan sahaja — 1/6 + Asabah', num: DEN / 6, den: DEN, type: 'fixed-plus-residue', residueKey: 'grandfather' });
+      } else {
+        shares.push({ key: 'grandfather', name: 'Datuk', meta: 'Tiada anak — Asabah (baki)', num: 0, den: DEN, type: 'residue-only', residueKey: 'grandfather' });
+      }
+    }
+
+    // Grandmother (only if mother not alive)
+    if (hasGrandmother) {
+      shares.push({ key: 'grandmother', name: 'Nenek', meta: 'Ibu tiada — 1/6', num: DEN / 6, den: DEN, type: 'fixed' });
+    }
+
+    // Daughters (fixed, only if no sons)
+    if (sons === 0 && daughters > 0) {
+      const totalNum = daughters === 1 ? DEN / 2 : (2 * DEN) / 3;
+      const each = totalNum / daughters;
+      for (let i = 1; i <= daughters; i++) {
+        shares.push({ key: 'daughter' + i, name: daughters > 1 ? `Anak Perempuan ${i}` : 'Anak Perempuan', meta: daughters === 1 ? 'Seorang, tiada anak lelaki — 1/2' : `${daughters} orang, tiada anak lelaki — 2/3 dikongsi`, num: each, den: DEN, type: 'fixed' });
+      }
+    }
+
+    // Full sisters (fixed, only if no full brothers AND no children AND no father)
+    if (!hasChildren && !hasFather && fullBrothers === 0 && fullSisters > 0) {
+      const totalNum = fullSisters === 1 ? DEN / 2 : (2 * DEN) / 3;
+      const each = totalNum / fullSisters;
+      for (let i = 1; i <= fullSisters; i++) {
+        shares.push({ key: 'sister' + i, name: fullSisters > 1 ? `Saudara Perempuan ${i}` : 'Saudara Perempuan', meta: fullSisters === 1 ? 'Seorang — 1/2' : `${fullSisters} orang — 2/3 dikongsi`, num: each, den: DEN, type: 'fixed' });
+      }
+    }
+
+    // Sum fixed shares
+    let fixedSum = shares.reduce((s, h) => s + h.num, 0);
+
+    // Aul check: if fixedSum > DEN, scale denominator up to fixedSum (Aul)
+    let aulApplied = false;
+    let originalDen = DEN;
+    if (fixedSum > DEN) {
+      aulApplied = true;
+      const newDen = fixedSum;
+      shares.forEach(h => { h.den = newDen; }); // num stays same, den grows -> smaller fraction
+      DEN = newDen;
+      fixedSum = shares.reduce((s, h) => s + h.num, 0); // same as newDen now
+    }
+
+    // Determine residue (Asabah) recipients: sons, daughters get nothing extra here (they're fixed unless sons present)
+    // If sons present: sons + daughters together split the RESIDUE after fixed shares of others, at 2:1
+    let residueNum = DEN - fixedSum; // could be 0 if aul applied
+    if (residueNum < 0) residueNum = 0;
+
+    const asabahEntries = [];
+    if (sons > 0) {
+      // sons & daughters split residue 2:1
+      const units = sons * 2 + daughters * 1;
+      if (units > 0 && residueNum > 0) {
+        const perUnit = residueNum / units;
+        for (let i = 1; i <= sons; i++) {
+          asabahEntries.push({ name: sons > 1 ? `Anak Lelaki ${i}` : 'Anak Lelaki', meta: 'Asabah (2 bahagian)', num: perUnit * 2, den: DEN });
+        }
+        for (let i = 1; i <= daughters; i++) {
+          asabahEntries.push({ name: daughters > 1 ? `Anak Perempuan ${i} (tambahan)` : 'Anak Perempuan (tambahan)', meta: 'Asabah (1 bahagian, bersama anak lelaki)', num: perUnit * 1, den: DEN });
+        }
+        residueNum = 0;
+      }
+    } else if (fatherIsAsabahOnly || shares.some(h => h.type === 'residue-only' || h.type === 'fixed-plus-residue')) {
+      const rk = shares.find(h => h.residueKey);
+      if (rk && residueNum > 0) {
+        const target = shares.find(h => h.key === rk.residueKey);
+        target.num += residueNum;
+        target.meta += ` (+ baki ${fracLabel(residueNum, DEN)})`;
+        residueNum = 0;
+      }
+    } else if (!hasChildren && !hasFather && !hasGrandfather && fullBrothers > 0) {
+      // brothers take residue, sisters share with them 2:1 if both present
+      const totalSisterFixedRemoved = false;
+      // remove previously added "fixed" sisters since brothers present changes their status to asabah co-sharers
+      for (let i = shares.length - 1; i >= 0; i--) {
+        if (shares[i].key && shares[i].key.startsWith('sister')) shares.splice(i, 1);
+      }
+      fixedSum = shares.reduce((s, h) => s + h.num, 0);
+      residueNum = DEN - fixedSum;
+      if (residueNum < 0) residueNum = 0;
+      const units = fullBrothers * 2 + fullSisters * 1;
+      if (units > 0 && residueNum > 0) {
+        const perUnit = residueNum / units;
+        for (let i = 1; i <= fullBrothers; i++) {
+          asabahEntries.push({ name: fullBrothers > 1 ? `Saudara Lelaki ${i}` : 'Saudara Lelaki', meta: 'Asabah (2 bahagian)', num: perUnit * 2, den: DEN });
+        }
+        for (let i = 1; i <= fullSisters; i++) {
+          asabahEntries.push({ name: fullSisters > 1 ? `Saudara Perempuan ${i}` : 'Saudara Perempuan', meta: 'Asabah (1 bahagian, bersama saudara lelaki)', num: perUnit * 1, den: DEN });
+        }
+        residueNum = 0;
+      }
+    }
+
+    const allHeirs = [...shares.filter(h => h.num > 0), ...asabahEntries];
+    const totalAssignedNum = allHeirs.reduce((s, h) => s + h.num, 0);
+    const noHeirsAtAll = allHeirs.length === 0;
+    const leftoverToBaitulmal = Math.max(0, DEN - totalAssignedNum);
+
+    renderResults({
+      netEstate, gross, funeral, debts, sepencarian, wasiatUsed, wasiatCapped: wasiatInput > maxWasiat && wasiatInput > 0,
+      heirs: allHeirs, den: DEN, aulApplied, originalDen, noHeirsAtAll, leftoverToBaitulmal
+    });
+  }
+
+  function renderResults(r) {
+    let html = '';
+
+    html += `<div class="net-estate-box">
+      <h4>Harta Pusaka Bersih (Untuk Faraid)</h4>
+      <div class="amount">${fmtMoney(r.netEstate)}</div>
+      <div class="breakdown">
+        <div><span>Harta Kasar</span><span>${fmtMoney(r.gross)}</span></div>
+        <div><span>Tolak Kos Jenazah</span><span>− ${fmtMoney(r.funeral)}</span></div>
+        <div><span>Tolak Hutang</span><span>− ${fmtMoney(r.debts)}</span></div>
+        <div><span>Tolak Harta Sepencarian</span><span>− ${fmtMoney(r.sepencarian)}</span></div>
+        <div><span>Tolak Wasiat${r.wasiatCapped ? ' (dihadkan 1/3)' : ''}</span><span>− ${fmtMoney(r.wasiatUsed)}</span></div>
+      </div>
+    </div>`;
+
+    if (r.aulApplied) {
+      html += `<div class="aul-flag"><strong>Aul Dikenakan:</strong> Jumlah bahagian tetap waris melebihi keseluruhan harta. Bahagian setiap waris telah dikurangkan secara berkadar (penyebut asal ${r.originalDen} ditukar kepada ${r.den}) supaya jumlah keseluruhan kekal saksama.</div>`;
+    }
+
+    if (r.noHeirsAtAll) {
+      html += `<div class="baitulmal-note"><strong>Tiada Waris Dikenalpasti:</strong> Berdasarkan maklumat yang diberikan, tiada waris layak dikenal pasti. Harta akan diserahkan kepada Baitulmal mengikut prosedur negeri berkenaan. Sila rujuk Peguam Syarie untuk pengesahan lanjut, terutamanya jika terdapat waris lain yang tidak disenaraikan di sini (contoh: datuk/nenek sebelah lain, cucu, dll).</div>`;
+    } else {
+      html += `<table class="result-table"><thead><tr><th>Waris</th><th>Bahagian</th><th>Nilai (RM)</th></tr></thead><tbody>`;
+      r.heirs.forEach(h => {
+        const amount = (h.num / r.den) * r.netEstate;
+        html += `<tr>
+          <td><span class="heir-name">${h.name}</span><span class="heir-meta">${h.meta}</span></td>
+          <td><span class="frac-pill">${fracLabel(h.num, r.den)}</span></td>
+          <td class="rm-amount">${fmtMoney(amount)}</td>
+        </tr>`;
+      });
+      html += `</tbody></table>`;
+
+      if (r.leftoverToBaitulmal > 0.0001) {
+        const leftoverAmount = (r.leftoverToBaitulmal / r.den) * r.netEstate;
+        html += `<div class="no-residue-note">Baki tidak diagihkan: <strong>${fracLabel(r.leftoverToBaitulmal, r.den)}</strong> (${fmtMoney(leftoverAmount)}) — tiada waris Asabah dikenal pasti untuk menerima baki ini berdasarkan maklumat semasa. Dalam keadaan sebenar, baki ini mungkin diserahkan kepada waris lain yang tidak disenaraikan (contoh: datuk/nenek/saudara jauh) atau Baitulmal. Sila rujuk Peguam Syarie untuk kepastian.</div>`;
+      }
+    }
+
+    document.getElementById('resultsContent').innerHTML = html;
+    document.getElementById('resultsPanel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>
