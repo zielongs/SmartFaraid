@@ -47,11 +47,12 @@ a { color: inherit; }
   background: var(--white);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
-  padding: .6rem 5%;
+  padding: 0;
   gap: 2rem;
 }
-.site-header__brand img { height: 42px; width: auto; }
-.site-header__bar { display: flex; align-items: center; justify-content: flex-end; gap: 2rem; flex: 1; }
+.site-header__brand { display: flex; align-items: center; padding: 0; margin: 0; }
+.site-header__brand img { height: 78px; width: auto; display: block; margin: 0; padding: 0; }
+.site-header__bar { display: flex; align-items: center; justify-content: flex-end; gap: 2rem; flex: 1; padding: .6rem 5% .6rem 1.5rem; }
 .site-header__nav { display: flex; gap: 1.75rem; }
 .site-header__nav a {
   text-decoration: none; font-size: .875rem; font-weight: 500; color: var(--text);
@@ -136,16 +137,16 @@ a { color: inherit; }
 
 .hero__visual { display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
 .book-frame {
-  width: 280px; height: 340px;
+  width: 480px; height: 380px;
   display: grid; place-items: center;
   position: relative;
 }
 .book-frame::before {
-  content: ''; position: absolute; width: 220px; height: 220px;
+  content: ''; position: absolute; width: 380px; height: 380px;
   background: radial-gradient(circle, rgba(200,157,72,.28), transparent 70%);
   border-radius: 50%; z-index: -1;
 }
-.book-frame__img { max-width: 260px; max-height: 320px; object-fit: contain; filter: drop-shadow(0 24px 50px rgba(0,0,0,.45)); }
+.book-frame__img { max-width: 460px; max-height: 360px; width: 100%; object-fit: contain; filter: drop-shadow(0 24px 50px rgba(0,0,0,.45)); }
 .book-frame--placeholder { background: linear-gradient(145deg, #1f4a30, #0e2818); width: 220px; height: 280px; border-radius: 4px 16px 16px 4px; box-shadow: -8px 6px 0 #0a1e10, 0 20px 60px rgba(0,0,0,.5); }
 .book-frame--placeholder::after { content: 'SIJIL FARAID'; color: var(--gold-light); font-weight: 700; font-size: .8rem; letter-spacing: .1em; }
 
@@ -288,7 +289,7 @@ a { color: inherit; }
   margin-bottom: 2rem;
 }
 .site-footer__brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
-.site-footer__brand-mark { width: 46px; height: 46px; fill: var(--white); flex-shrink: 0; }
+.site-footer__brand-mark { width: auto; height: 46px; flex-shrink: 0; object-fit: contain; }
 .site-footer__brand-text { display: flex; flex-direction: column; line-height: 1.2; }
 .site-footer__brand-text strong { color: var(--white); font-size: 1.25rem; font-weight: 800; }
 .site-footer__brand-text small { color: rgba(255,255,255,.75); font-size: .7rem; font-weight: 600; letter-spacing: .12em; }
@@ -334,6 +335,7 @@ a { color: inherit; }
 
 .site-footer__badges { display: flex; align-items: center; gap: .85rem; flex-wrap: wrap; }
 .site-footer__badges img { height: 36px; width: auto; border-radius: 4px; background: rgba(255,255,255,.92); padding: 3px 6px; }
+.site-footer__badges img.badge--achieve { height: 56px; background: none; padding: 0; border-radius: 0; }
 
 /* WhatsApp floating Suri button */
 #chatbot-toggle {
@@ -361,6 +363,7 @@ a { color: inherit; }
   .site-footer__info { gap: 2rem; }
   .site-footer__bottom { flex-direction: column; align-items: flex-start; }
   .site-footer__badges img { height: 30px; }
+  .site-footer__badges img.badge--achieve { height: 48px; }
 }
 
 /* ============ RESPONSIVE ============ */
@@ -369,8 +372,8 @@ a { color: inherit; }
   .hero__inner { display: flex; flex-direction: column; align-items: center; }
   .hero__copy { margin-left: auto; margin-right: auto; }
   .hero__visual { order: -1; }
-  .book-frame { width: 200px; height: 250px; }
-  .book-frame__img { max-width: 180px; max-height: 230px; }
+  .book-frame { width: 320px; height: 260px; }
+  .book-frame__img { max-width: 300px; max-height: 240px; }
 }
 @media (max-width: 860px) {
   .site-header__nav { display: none; }
@@ -429,6 +432,74 @@ a { color: inherit; }
   .corner-card__body { padding: 1.5rem; }
 }
 
+
+/* ============ GALLERY ============ */
+.gallery-section { padding: 5.5rem 5%; background: var(--cream); }
+.gallery-section__inner { max-width: 1100px; margin: 0 auto; }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 160px);
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+.gallery-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(145deg, var(--green-dark), var(--green));
+  grid-row: span 1;
+  grid-column: span 1;
+}
+.gallery-card--tall { grid-row: span 2; }
+.gallery-card--pos-1 { grid-column: 1; grid-row: 1 / span 2; }
+.gallery-card--pos-2 { grid-column: 2; grid-row: 1; }
+.gallery-card--pos-3 { grid-column: 3; grid-row: 1; }
+.gallery-card--pos-4 { grid-column: 4; grid-row: 1 / span 2; }
+.gallery-card--pos-5 { grid-column: 2; grid-row: 2; }
+.gallery-card--pos-6 { grid-column: 3; grid-row: 2; }
+.gallery-card img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .4s ease;
+}
+.gallery-card:hover img { transform: scale(1.06); }
+.gallery-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(0,40,28,.55) 100%);
+  pointer-events: none;
+}
+.gallery-card__badge {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--white);
+  display: grid; place-items: center;
+  padding: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+.gallery-card__badge img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.gallery-card--empty {
+  display: flex; align-items: center; justify-content: center;
+}
+.gallery-card--empty img { display: none; }
+.gallery-card--empty::before {
+  content: 'SmartFaraid';
+  color: rgba(255,255,255,.4); font-size: .8rem; font-weight: 600; letter-spacing: .05em;
+}
+.gallery-card--empty::after { display: none; }
+
+@media (max-width: 860px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(6, 180px); }
+  .gallery-card--tall,
+  .gallery-card--pos-1, .gallery-card--pos-2, .gallery-card--pos-3,
+  .gallery-card--pos-4, .gallery-card--pos-5, .gallery-card--pos-6 {
+    grid-column: auto; grid-row: span 1;
+  }
+}
+@media (max-width: 480px) {
+  .gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(6, 220px); gap: .85rem; }
+  .gallery-section { padding: 3.5rem 5%; }
+}
 
 /* ============ CONTACT CARDS ============ */
 .contact-grid {
@@ -517,7 +588,7 @@ a { color: inherit; }
 
       <div class="hero__visual">
         <div class="book-frame">
-          <img src="images/book_green.jpg" alt="Sijil Faraid" class="book-frame__img" onerror="this.style.display='none'; this.parentElement.classList.add('book-frame--placeholder')" />
+          <img src="images/book_green.png" alt="Sijil Faraid" class="book-frame__img" onerror="this.style.display='none'; this.parentElement.classList.add('book-frame--placeholder')" />
         </div>
       </div>
     </section>
@@ -568,7 +639,7 @@ a { color: inherit; }
               <p>Persediaan dan pengiraan Faraid sendiri secara online — pantas dan menjimatkan.</p>
             </div>
             <div class="product-card__body">
-              <div class="product-card__price">RM 400<span>.00</span></div>
+              <div class="product-card__price">RM 400</div>
               <ul class="product-card__features">
                 <li>Pengiraan anggaran Faraid secara automatik</li>
                 <li>Senarai waris yang berhak</li>
@@ -588,7 +659,7 @@ a { color: inherit; }
               <p>Dihantar dan disemak oleh peguam Syarie panel kami untuk ketepatan dan kesahihan.</p>
             </div>
             <div class="product-card__body">
-              <div class="product-card__price">RM 3500<span>.00</span></div>
+              <div class="product-card__price">RM 3500</div>
               <ul class="product-card__features">
                 <li>Semua dalam SmartFaraid Direct +</li>
                 <li>Disemak dan dihantar oleh Peguam Syarie panel</li>
@@ -608,7 +679,7 @@ a { color: inherit; }
               <p>Penerima manfaat lebih daripada 1 lapisan. Termasuk perundingan dan isi dengan penyerahan.</p>
             </div>
             <div class="product-card__body">
-              <div class="product-card__price">RM 4800<span>.00</span></div>
+              <div class="product-card__price">RM 4800</div>
               <ul class="product-card__features">
                 <li>Semua dalam SmartFaraid Bantuan +</li>
                 <li>Liputan lebih daripada 1 lapisan penerima manfaat</li>
@@ -622,6 +693,47 @@ a { color: inherit; }
         </div>
 
         <p class="products-section__note">Perlukan bantuan memilih pelan? <a href="https://wa.me/60182209929">Hubungi kami</a> untuk maklumat lanjut.</p>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery-section" id="galeri" aria-label="Galeri keluarga">
+      <div class="gallery-section__inner">
+        <p class="section-label">Bersama Keluarga Anda</p>
+        <h2 class="section-title">Membantu Keluarga Muslim Merancang Pusaka</h2>
+        <p class="section-sub">SmartFaraid hadir untuk memudahkan setiap langkah persediaan Faraid keluarga anda.</p>
+
+        <div class="gallery-grid">
+          <figure class="gallery-card gallery-card--tall gallery-card--pos-1">
+            <img src="images/family1.png" alt="Keluarga Muslim merancang pusaka bersama" loading="lazy" onerror="this.closest('.gallery-card').classList.add('gallery-card--empty')" />
+            <span class="gallery-card__badge"><img src="images/logo.png" alt="" onerror="this.parentElement.style.display='none'" /></span>
+          </figure>
+
+          <figure class="gallery-card gallery-card--pos-2">
+            <img src="images/faraid1.jpg" alt="Dokumen dan persediaan Faraid" loading="lazy" onerror="this.closest('.gallery-card').classList.add('gallery-card--empty')" />
+            <span class="gallery-card__badge"><img src="images/logo.png" alt="" onerror="this.parentElement.style.display='none'" /></span>
+          </figure>
+
+          <figure class="gallery-card gallery-card--pos-3">
+            <img src="images/faraid2.jpg" alt="Perundingan persediaan Sijil Faraid" loading="lazy" onerror="this.closest('.gallery-card').classList.add('gallery-card--empty')" />
+            <span class="gallery-card__badge"><img src="images/logo.png" alt="" onerror="this.parentElement.style.display='none'" /></span>
+          </figure>
+
+          <figure class="gallery-card gallery-card--tall gallery-card--pos-4">
+            <img src="images/family2.png" alt="Keluarga Muslim gembira selepas persediaan pusaka" loading="lazy" onerror="this.closest('.gallery-card').classList.add('gallery-card--empty')" />
+            <span class="gallery-card__badge"><img src="images/logo.png" alt="" onerror="this.parentElement.style.display='none'" /></span>
+          </figure>
+
+          <figure class="gallery-card gallery-card--pos-5">
+            <img src="images/faraid3.jpg" alt="Persediaan dokumen Faraid bersama keluarga" loading="lazy" onerror="this.closest('.gallery-card').classList.add('gallery-card--empty')" />
+            <span class="gallery-card__badge"><img src="images/logo.png" alt="" onerror="this.parentElement.style.display='none'" /></span>
+          </figure>
+
+          <figure class="gallery-card gallery-card--pos-6">
+            <img src="images/faraid4.jpg" alt="Sesi perundingan Faraid keluarga" loading="lazy" onerror="this.closest('.gallery-card').classList.add('gallery-card--empty')" />
+            <span class="gallery-card__badge"><img src="images/logo.png" alt="" onerror="this.parentElement.style.display='none'" /></span>
+          </figure>
+        </div>
       </div>
     </section>
 
@@ -697,7 +809,7 @@ a { color: inherit; }
     <div class="site-footer__inner">
       <div class="site-footer__top">
         <a class="site-footer__brand" href="index.html" aria-label="WasiatKu home">
-          <svg viewBox="0 0 24 24" class="site-footer__brand-mark" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4.2l5.8 2.58v3.4c0 4.18-2.78 8.07-5.8 9.1-3.02-1.03-5.8-4.92-5.8-9.1V7.78L12 5.2z"/><path d="M12 6.2v3.2H9.6c0 1.5 1.07 2.6 2.4 2.6V16h0v-4h2.4c1.33 0 2.4-1.1 2.4-2.6H12V6.2z"/></svg>
+          <img src="images/footer.png" alt="SmartWills" class="site-footer__brand-mark" />
           <span class="site-footer__brand-text">
             <strong>SmartWills</strong>
             <small>WASIATKU</small>
@@ -767,6 +879,7 @@ a { color: inherit; }
           <img src="images/badge_vpc.png" alt="VPC" onerror="this.style.display='none'" />
           <img src="images/badge_standards.png" alt="Standards Malaysia" onerror="this.style.display='none'" />
           <img src="images/badge_mybr.png" alt="Malaysia Book of Records" onerror="this.style.display='none'" />
+          <img src="images/achieve.png" alt="Achievements" onerror="this.style.display=\'none\'" />
         </div>
       </div>
     </div>
