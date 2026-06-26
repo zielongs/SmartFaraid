@@ -31,7 +31,7 @@
   --radius-lg:   20px;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; font-size: 18px; }
 body {
   font-family: 'Poppins', sans-serif;
   color: var(--text);
@@ -289,14 +289,13 @@ a { color: inherit; }
   margin-bottom: 2rem;
 }
 .site-footer__brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
-.site-footer__brand-mark { width: auto; height: 46px; flex-shrink: 0; object-fit: contain; }
+.site-footer__brand-mark { width: auto; height: 80px; flex-shrink: 0; object-fit: contain; }
 .site-footer__brand-text { display: flex; flex-direction: column; line-height: 1.2; }
 .site-footer__brand-text strong { color: var(--white); font-size: 1.25rem; font-weight: 800; }
 .site-footer__brand-text small { color: rgba(255,255,255,.75); font-size: .7rem; font-weight: 600; letter-spacing: .12em; }
 
-.site-footer__tagline { text-align: right; color: var(--white); font-size: .82rem; font-weight: 600; line-height: 1.5; }
-.site-footer__tagline span { display: block; }
-.site-footer__tagline-curve { width: 90px; height: 16px; margin: .35rem 0 0 auto; display: block; }
+.site-footer__tagline { text-align: right; }
+.site-footer__tagline img { height: 56px; width: auto; object-fit: contain; }
 
 .site-footer__company { margin-bottom: 2.5rem; }
 .site-footer__company h2 { color: var(--white); font-size: 1.3rem; font-weight: 800; }
@@ -333,10 +332,14 @@ a { color: inherit; }
 .site-footer__socials a svg { width: 16px; height: 16px; fill: var(--green); }
 .site-footer__socials a:hover { transform: translateY(-2px); background: var(--gold-light); }
 
+.site-footer__badges { display: flex; align-items: center; gap: .85rem; flex-wrap: wrap; }
+.site-footer__badges img { height: 36px; width: auto; border-radius: 4px; background: rgba(255,255,255,.92); padding: 3px 6px; }
+.site-footer__badges img.badge--achieve { height: 56px; background: none; padding: 0; border-radius: 0; }
+
 /* WhatsApp floating Suri button */
 #chatbot-toggle {
   position: fixed; bottom: 20px; right: 20px; z-index: 300;
-  width: 76px; height: 76px; display: grid; place-items: center;
+  width: 110px; height: 110px; display: grid; place-items: center;
   text-decoration: none; transition: transform .2s;
 }
 #chatbot-toggle:hover { transform: scale(1.06); }
@@ -353,7 +356,13 @@ a { color: inherit; }
 @media (max-width: 860px) {
   .site-footer__top { flex-direction: column; }
   .site-footer__tagline { text-align: left; }
-  .site-footer__tagline-curve { margin: .35rem 0 0 0; }
+  .site-footer__tagline img { margin-top: .5rem; }
+}
+@media (max-width: 600px) {
+  .site-footer__info { gap: 2rem; }
+  .site-footer__bottom { flex-direction: column; align-items: flex-start; }
+  .site-footer__badges img { height: 30px; }
+  .site-footer__badges img.badge--achieve { height: 48px; }
 }
 
 /* ============ RESPONSIVE ============ */
@@ -516,7 +525,7 @@ a { color: inherit; }
 <body>
   <header class="site-header" aria-label="Main navigation">
     <a class="site-header__brand" href="index.html" aria-label="SmartFaraid home">
-      <img src="images/logo_smartfaraid.png" alt="SmartFaraid by SmartWills" />
+      <img src="images/logo.png" alt="SmartFaraid by SmartWills" />
     </a>
 
     <div class="site-header__bar">
@@ -696,26 +705,32 @@ a { color: inherit; }
         <div class="gallery-grid">
           <figure class="gallery-card gallery-card--tall gallery-card--pos-1">
             <img src="images/family1.png" alt="Keluarga Muslim merancang pusaka bersama" loading="lazy" onerror="this.closest('.gallery-card').classList.add('gallery-card--empty')" />
+            <span class="gallery-card__badge"><img src="images/logo.png" alt="" onerror="this.parentElement.style.display='none'" /></span>
           </figure>
 
           <figure class="gallery-card gallery-card--pos-2">
             <img src="images/faraid1.jpg" alt="Dokumen dan persediaan Faraid" loading="lazy" onerror="this.closest('.gallery-card').classList.add('gallery-card--empty')" />
+            <span class="gallery-card__badge"><img src="images/logo.png" alt="" onerror="this.parentElement.style.display='none'" /></span>
           </figure>
 
           <figure class="gallery-card gallery-card--pos-3">
             <img src="images/faraid2.jpg" alt="Perundingan persediaan Sijil Faraid" loading="lazy" onerror="this.closest('.gallery-card').classList.add('gallery-card--empty')" />
+            <span class="gallery-card__badge"><img src="images/logo.png" alt="" onerror="this.parentElement.style.display='none'" /></span>
           </figure>
 
           <figure class="gallery-card gallery-card--tall gallery-card--pos-4">
             <img src="images/family2.png" alt="Keluarga Muslim gembira selepas persediaan pusaka" loading="lazy" onerror="this.closest('.gallery-card').classList.add('gallery-card--empty')" />
+            <span class="gallery-card__badge"><img src="images/logo.png" alt="" onerror="this.parentElement.style.display='none'" /></span>
           </figure>
 
           <figure class="gallery-card gallery-card--pos-5">
             <img src="images/faraid3.jpg" alt="Persediaan dokumen Faraid bersama keluarga" loading="lazy" onerror="this.closest('.gallery-card').classList.add('gallery-card--empty')" />
+            <span class="gallery-card__badge"><img src="images/logo.png" alt="" onerror="this.parentElement.style.display='none'" /></span>
           </figure>
 
           <figure class="gallery-card gallery-card--pos-6">
             <img src="images/faraid4.jpg" alt="Sesi perundingan Faraid keluarga" loading="lazy" onerror="this.closest('.gallery-card').classList.add('gallery-card--empty')" />
+            <span class="gallery-card__badge"><img src="images/logo.png" alt="" onerror="this.parentElement.style.display='none'" /></span>
           </figure>
         </div>
       </div>
@@ -793,16 +808,10 @@ a { color: inherit; }
     <div class="site-footer__inner">
       <div class="site-footer__top">
         <a class="site-footer__brand" href="index.html" aria-label="WasiatKu home">
-          <img src="images/footer.png" alt="SmartWills" class="site-footer__brand-mark" />
-          <span class="site-footer__brand-text">
-            <strong>SmartWills</strong>
-            <small>WASIATKU</small>
-          </span>
+          <img src="images/footer_logo.png" alt="SmartWills" class="site-footer__brand-mark" />
         </a>
         <div class="site-footer__tagline">
-          <span>Cara paling <strong>PINTAR</strong></span>
-          <span>dan <strong>PANTAS</strong></span>
-          <svg viewBox="0 0 100 20" class="site-footer__tagline-curve" aria-hidden="true"><path d="M5 5 Q50 25 95 5" stroke="rgba(255,255,255,.7)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+          <img src="images/slogan.png" alt="Cara paling PINTAR dan PANTAS" />
         </div>
       </div>
 
@@ -859,10 +868,7 @@ a { color: inherit; }
         </div>
 
         <div class="site-footer__badges" aria-label="Certifications">
-          <img src="images/badge_biztrust.png" alt="BizTrust" onerror="this.style.display='none'" />
-          <img src="images/badge_vpc.png" alt="VPC" onerror="this.style.display='none'" />
-          <img src="images/badge_standards.png" alt="Standards Malaysia" onerror="this.style.display='none'" />
-          <img src="images/badge_mybr.png" alt="Malaysia Book of Records" onerror="this.style.display='none'" />
+          <img src="images/achieve.png" alt="Achievements" class="badge--achieve" onerror="this.style.display='none'" />
         </div>
       </div>
     </div>
