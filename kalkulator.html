@@ -332,10 +332,6 @@ a { color: inherit; }
 .site-footer__socials a svg { width: 16px; height: 16px; fill: var(--green); }
 .site-footer__socials a:hover { transform: translateY(-2px); background: var(--gold-light); }
 
-.site-footer__badges { display: flex; align-items: center; gap: .85rem; flex-wrap: wrap; }
-.site-footer__badges img { height: 36px; width: auto; border-radius: 4px; background: rgba(255,255,255,.92); padding: 3px 6px; }
-.site-footer__badges img.badge--achieve { height: 56px; background: none; padding: 0; border-radius: 0; }
-
 /* WhatsApp floating Suri button */
 #chatbot-toggle {
   position: fixed; bottom: 20px; right: 20px; z-index: 300;
@@ -357,12 +353,6 @@ a { color: inherit; }
   .site-footer__top { flex-direction: column; }
   .site-footer__tagline { text-align: left; }
   .site-footer__tagline-curve { margin: .35rem 0 0 0; }
-}
-@media (max-width: 600px) {
-  .site-footer__info { gap: 2rem; }
-  .site-footer__bottom { flex-direction: column; align-items: flex-start; }
-  .site-footer__badges img { height: 30px; }
-  .site-footer__badges img.badge--achieve { height: 48px; }
 }
 
 /* ============ RESPONSIVE ============ */
@@ -902,7 +892,6 @@ a { color: inherit; }
           <img src="images/badge_vpc.png" alt="VPC" onerror="this.style.display='none'" />
           <img src="images/badge_standards.png" alt="Standards Malaysia" onerror="this.style.display='none'" />
           <img src="images/badge_mybr.png" alt="Malaysia Book of Records" onerror="this.style.display='none'" />
-          <img src="images/achieve.png" alt="Achievements" onerror="this.style.display=\'none\'" />
         </div>
       </div>
     </div>
