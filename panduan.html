@@ -49,7 +49,7 @@ a { color: inherit; }
   gap: 2rem;
 }
 .site-header__brand { display: flex; align-items: center; padding: 0; margin: 0; }
-.site-header__brand img { height: 78px; width: auto; display: block; margin: 0; padding: 0; }
+.site-header__brand img { height: 110px; width: auto; display: block; margin: 0; padding: 0; }
 .site-header__bar { display: flex; align-items: center; justify-content: flex-end; gap: 2rem; flex: 1; padding: .6rem 5% .6rem 1.5rem; }
 .site-header__nav { display: flex; gap: 1.75rem; }
 .site-header__nav a {
@@ -749,6 +749,27 @@ a { color: inherit; }
 .contact-card p { font-size: .85rem; color: var(--muted); line-height: 1.6; margin-bottom: .5rem; }
 .contact-card__map { color: var(--gold-dark) !important; font-weight: 600 !important; font-size: .85rem !important; }
 
+
+/* ============ PHOTO STRIP ============ */
+.photo-strip { padding: 0 5%; margin-top: -1px; }
+.photo-strip__inner {
+  max-width: 1180px; margin: 0 auto;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  overflow: hidden; height: 280px;
+  background: linear-gradient(145deg, var(--green-dark), var(--green));
+  position: relative;
+}
+.photo-strip__inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-strip--empty .photo-strip__inner img { display: none; }
+.photo-strip--empty .photo-strip__inner::after {
+  content: 'SmartFaraid'; position: absolute; inset: 0;
+  display: grid; place-items: center; color: rgba(255,255,255,.35);
+  font-size: 1rem; font-weight: 600; letter-spacing: .05em;
+}
+@media (max-width: 768px) {
+  .photo-strip__inner { height: 200px; border-radius: 0 0 var(--radius) var(--radius); }
+}
+
 </style>
 </head>
 <body>
@@ -756,7 +777,7 @@ a { color: inherit; }
 <!-- HEADER -->
 <header class="site-header" aria-label="Main navigation">
   <a class="site-header__brand" href="index.html" aria-label="SmartFaraid home">
-    <img src="images/logo.png" alt="SmartFaraid by SmartWills" />
+    <img src="images/logo_header.png" alt="SmartFaraid by SmartWills" />
   </a>
   <div class="site-header__bar">
     <nav class="site-header__nav" aria-label="Primary navigation">
@@ -801,6 +822,13 @@ a { color: inherit; }
     <a href="#pengiraan">Kaedah Pengiraan</a>
     <a href="#apaitusf">Apakah SmartFaraid?</a>
     <a href="#faq">FAQ</a>
+  </div>
+</section>
+
+<!-- PHOTO STRIP -->
+<section class="photo-strip" aria-label="Gambar keluarga">
+  <div class="photo-strip__inner">
+    <img src="images/panduan_hero.png" alt="Keluarga Muslim membaca panduan Faraid" loading="lazy" onerror="this.closest('.photo-strip').classList.add('photo-strip--empty')" />
   </div>
 </section>
 

@@ -51,7 +51,7 @@ a { color: inherit; }
   gap: 2rem;
 }
 .site-header__brand { display: flex; align-items: center; padding: 0; margin: 0; }
-.site-header__brand img { height: 78px; width: auto; display: block; margin: 0; padding: 0; }
+.site-header__brand img { height: 110px; width: auto; display: block; margin: 0; padding: 0; }
 .site-header__bar { display: flex; align-items: center; justify-content: flex-end; gap: 2rem; flex: 1; padding: .6rem 5% .6rem 1.5rem; }
 .site-header__nav { display: flex; gap: 1.75rem; }
 .site-header__nav a {
@@ -216,6 +216,8 @@ a { color: inherit; }
 }
 .product-card--featured { border-color: var(--gold); position: relative; }
 .product-card--featured .product-card__head { background: linear-gradient(135deg, var(--gold-dark), var(--gold)); }
+.product-card--combo { border-color: var(--green); }
+.product-card--combo .product-card__head { background: linear-gradient(135deg, #004f38, var(--green)); }
 
 .products-section__note { text-align: center; margin-top: 2.5rem; font-size: .88rem; color: var(--muted); }
 .products-section__note a { color: var(--gold-dark); font-weight: 600; text-decoration: none; }
@@ -236,6 +238,7 @@ a { color: inherit; }
 .btn--outline-white { border: 2px solid rgba(255,255,255,.5); color: var(--white); }
 .btn--outline-white:hover { border-color: var(--white); transform: translateY(-2px); }
 .product-card__body .btn { width: 100%; }
+.product-card__note { font-size: .78rem; color: var(--muted); background: var(--cream); border-left: 3px solid var(--gold); border-radius: 4px; padding: .6rem .85rem; margin-bottom: 1rem; line-height: 1.5; }
 
 /* ============ PROCESS ============ */
 .process-section { background: var(--cream); padding: 5.5rem 5%; }
@@ -525,7 +528,7 @@ a { color: inherit; }
 <body>
   <header class="site-header" aria-label="Main navigation">
     <a class="site-header__brand" href="index.html" aria-label="SmartFaraid home">
-      <img src="images/logo.png" alt="SmartFaraid by SmartWills" />
+      <img src="images/logo_header.png" alt="SmartFaraid by SmartWills" />
     </a>
 
     <div class="site-header__bar">
@@ -655,18 +658,37 @@ a { color: inherit; }
             <div class="product-card__head">
               <span class="product-card__badge product-card__badge--white">Popular</span>
               <h3>SmartFaraid <em>Bantuan</em></h3>
-              <p>Dihantar dan disemak oleh peguam Syarie panel kami untuk ketepatan dan kesahihan.</p>
+              <p>Sudah ada dokumen Faraid? Biar peguam Syarie panel kami yang uruskan permohonan bagi pihak anda.</p>
             </div>
             <div class="product-card__body">
               <div class="product-card__price">RM 3500</div>
               <ul class="product-card__features">
-                <li>Semua dalam SmartFaraid Direct +</li>
                 <li>Disemak dan dihantar oleh Peguam Syarie panel</li>
                 <li>Pengesahan waris dan dokumen sokongan</li>
                 <li>Bantuan permohonan Sijil Faraid rasmi</li>
                 <li>Sokongan sepanjang proses mahkamah</li>
               </ul>
               <a class="btn btn--gold" href="https://app.mysmartwills.com/?item_id=80">Mohon Sekarang</a>
+            </div>
+          </article>
+
+          <!-- DIRECT + BANTUAN COMBO -->
+          <article class="product-card product-card--combo">
+            <div class="product-card__head">
+              <span class="product-card__badge">Combo</span>
+              <h3>SmartFaraid <em>Direct + Bantuan</em></h3>
+              <p>Kami buat dokumen Faraid anda dan peguam Syarie panel kami uruskan permohonan sekali gus.</p>
+            </div>
+            <div class="product-card__body">
+              <div class="product-card__price">RM 3900 <span style="font-size:.85rem;font-weight:500;color:var(--muted);">(RM 400 + RM 3500)</span></div>
+              <ul class="product-card__features">
+                <li>Semua dalam SmartFaraid Direct</li>
+                <li>Semua dalam SmartFaraid Bantuan</li>
+                <li>Sesuai untuk yang ingin kami uruskan dari awal hingga akhir</li>
+                <li>Tiada perlu cari peguam sendiri</li>
+                <li>Tiada perlu berurusan terus dengan mahkamah</li>
+              </ul>
+              <p class="product-card__note" style="margin-bottom:0;">📞 Hubungi kami untuk maklumat lanjut mengenai pakej combo ini.</p>
             </div>
           </article>
 
