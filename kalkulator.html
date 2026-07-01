@@ -667,7 +667,7 @@ a { color: inherit; }
   <div class="site-header__bar">
     <nav class="site-header__nav" aria-label="Primary navigation">
       <a href="index.html">Laman Utama</a>
-      <a href="pelan.html">Pelan SmartFaraid</a>
+      <a href="pelan.html">SmartFaraid</a>
       <a href="panduan.html">Panduan Faraid</a>
       <a href="kalkulator.html" aria-current="page">Kalkulator</a>
       <a href="hubungikami.html">Hubungi Kami</a>
@@ -685,7 +685,7 @@ a { color: inherit; }
         </div>
         <nav aria-label="Mobile navigation">
           <a href="index.html">Laman Utama</a>
-          <a href="pelan.html">Pelan SmartFaraid</a>
+          <a href="pelan.html">SmartFaraid</a>
           <a href="panduan.html">Panduan Faraid</a>
           <a href="kalkulator.html">Kalkulator</a>
           <a href="hubungikami.html">Hubungi Kami</a>
@@ -848,7 +848,7 @@ a { color: inherit; }
         </div>
       </div>
       <div class="disclaimer-box">
-        <strong>Penafian:</strong> Kalkulator ini memberikan anggaran berdasarkan Mazhab Syafi'i yang diamalkan di Malaysia, untuk tujuan pendidikan sahaja. Kes yang melibatkan datuk/nenek, kalalah kompleks, atau isteri berbilang perlu disahkan oleh Peguam Syarie bertauliah atau institusi seperti Amanah Raya / Baitulmal.
+        <strong>Penafian:</strong> Kalkulator ini memberikan anggaran berdasarkan Mazhab Syafi'i yang diamalkan di Malaysia, untuk tujuan pendidikan sahaja. Kes yang melibatkan datuk/nenek, kalalah kompleks, atau isteri berbilang perlu disahkan oleh Peguam Panel bertauliah atau institusi seperti Amanah Raya / Baitulmal.
       </div>
     </div>
   </div>
@@ -1206,7 +1206,7 @@ a { color: inherit; }
     }
 
     if (r.noHeirsAtAll) {
-      html += `<div class="baitulmal-note"><strong>Tiada Waris Dikenalpasti:</strong> Berdasarkan maklumat yang diberikan, tiada waris layak dikenal pasti. Harta akan diserahkan kepada Baitulmal mengikut prosedur negeri berkenaan. Sila rujuk Peguam Syarie untuk pengesahan lanjut, terutamanya jika terdapat waris lain yang tidak disenaraikan di sini (contoh: datuk/nenek sebelah lain, cucu, dll).</div>`;
+      html += `<div class="baitulmal-note"><strong>Tiada Waris Dikenalpasti:</strong> Berdasarkan maklumat yang diberikan, tiada waris layak dikenal pasti. Harta akan diserahkan kepada Baitulmal mengikut prosedur negeri berkenaan. Sila rujuk Peguam Panel untuk pengesahan lanjut, terutamanya jika terdapat waris lain yang tidak disenaraikan di sini (contoh: datuk/nenek sebelah lain, cucu, dll).</div>`;
     } else {
       html += `<table class="result-table"><thead><tr><th>Waris</th><th>Bahagian</th><th>Nilai (RM)</th></tr></thead><tbody>`;
       r.heirs.forEach(h => {
@@ -1221,7 +1221,7 @@ a { color: inherit; }
 
       if (r.leftoverToBaitulmal > 0.0001) {
         const leftoverAmount = (r.leftoverToBaitulmal / r.den) * r.netEstate;
-        html += `<div class="no-residue-note">Baki tidak diagihkan: <strong>${fracLabel(r.leftoverToBaitulmal, r.den)}</strong> (${fmtMoney(leftoverAmount)}) — tiada waris Asabah dikenal pasti untuk menerima baki ini berdasarkan maklumat semasa. Dalam keadaan sebenar, baki ini mungkin diserahkan kepada waris lain yang tidak disenaraikan (contoh: datuk/nenek/saudara jauh) atau Baitulmal. Sila rujuk Peguam Syarie untuk kepastian.</div>`;
+        html += `<div class="no-residue-note">Baki tidak diagihkan: <strong>${fracLabel(r.leftoverToBaitulmal, r.den)}</strong> (${fmtMoney(leftoverAmount)}) — tiada waris Asabah dikenal pasti untuk menerima baki ini berdasarkan maklumat semasa. Dalam keadaan sebenar, baki ini mungkin diserahkan kepada waris lain yang tidak disenaraikan (contoh: datuk/nenek/saudara jauh) atau Baitulmal. Sila rujuk Peguam Panel untuk kepastian.</div>`;
       }
     }
 
