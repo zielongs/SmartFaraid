@@ -49,9 +49,38 @@ a { color: inherit; }
   display: flex; align-items: center; justify-content: space-between;
   padding: 0;
   gap: 2rem;
+  height: 90px;
+  overflow: visible;
+}
+.site-header__brand-frame {
+  background: transparent;
+  height: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
 }
 .site-header__brand { display: flex; align-items: center; padding: 0; margin: 0; }
-.site-header__brand img { height: 110px; width: auto; display: block; margin: 0; padding: 0; }
+.site-header__lang { display: flex; align-items: center; gap: .4rem; margin-left: .25rem; font-size: .8rem; font-weight: 600; }
+.site-header__lang a { text-decoration: none; color: var(--muted); padding: .2rem .15rem; transition: color .2s; }
+.site-header__lang a.active { color: var(--green); }
+.site-header__lang a:hover { color: var(--green); }
+.site-header__lang span { color: var(--border); }
+.site-header__brand img {
+  height: 130px; width: auto;
+  object-fit: contain;
+  display: block;
+  position: relative;
+  top: 14px;
+}
+@media (max-width: 640px) {
+  .site-header { height: 70px; }
+  .site-header__brand img { height: 96px; top: 12px; }
+}
 .site-header__bar { display: flex; align-items: center; justify-content: flex-end; gap: 2rem; flex: 1; padding: .6rem 5% .6rem 1.5rem; }
 .site-header__nav { display: flex; gap: 1.75rem; }
 .site-header__nav a {
@@ -477,9 +506,15 @@ a { color: inherit; }
 </head>
 <body>
   <header class="site-header" aria-label="Main navigation">
-    <a class="site-header__brand" href="index.html" aria-label="SmartFaraid home">
-      <img src="images/logo_header.png" alt="SmartFaraid by SmartWills" />
-    </a>
+    <div class="site-header__brand-frame">
+      <a class="site-header__brand" href="index.html" aria-label="SmartFaraid home">
+          <img src="images/Web_Logo.png" alt="SmartFaraid by SmartWills" onerror="this.src='images/logo_header.png'" />
+      </a>
+    </div>
+
+<div class="site-header__lang" aria-label="Language">
+  <a href="pelan.html" class="active">BM</a><span>|</span><a href="pelan-en.html">EN</a>
+</div>
 
     <div class="site-header__bar">
       <nav class="site-header__nav" aria-label="Primary navigation">
@@ -562,7 +597,7 @@ a { color: inherit; }
                 <li>Dokumen rumusan Faraid (PDF)</li>
                 <li>Akses kalkulator dalam talian</li>
               </ul>
-              <a class="btn btn--gold-outline" href="https://app.mysmartwills.com/?item_id=80">Mohon Sekarang</a>
+              <a class="btn btn--gold-outline" href="https://app.mysmartwills.com/?item_id=80">Buat Sekarang</a>
             </div>
           </article>
 
@@ -582,7 +617,7 @@ a { color: inherit; }
                 <li>Bantuan permohonan Sijil Faraid rasmi</li>
                 <li>Sokongan sepanjang proses mahkamah</li>
               </ul>
-              <a class="btn btn--gold" href="https://app.mysmartwills.com/?item_id=80">Mohon Sekarang</a>
+              <a class="btn btn--gold" href="https://app.mysmartwills.com/?item_id=80">Buat Sekarang</a>
             </div>
           </article>
 
@@ -602,7 +637,7 @@ a { color: inherit; }
                 <li>Bantuan pengisian dan penyerahan dokumen</li>
                 <li>Pengurus kes peribadi sepanjang proses</li>
               </ul>
-              <a class="btn btn--gold-outline" href="https://app.mysmartwills.com/?item_id=80">Mohon Sekarang</a>
+              <a class="btn btn--gold-outline" href="https://app.mysmartwills.com/?item_id=80">Buat Sekarang</a>
             </div>
           </article>
         </div>
@@ -698,7 +733,7 @@ a { color: inherit; }
         <h2>Bersedia untuk Mulakan?</h2>
         <p>Pilih SmartFaraid yang sesuai dan mulakan persediaan Sijil Faraid keluarga anda hari ini.</p>
         <div class="cta-section__actions">
-          <a class="btn btn--white" href="https://app.mysmartwills.com/?item_id=80">Mohon Sekarang</a>
+          <a class="btn btn--white" href="https://app.mysmartwills.com/?item_id=80">Buat Sekarang</a>
           <a class="btn btn--outline-white" href="hubungikami.html">Hubungi Kami</a>
         </div>
       </div>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kalkulator Faraid – SmartFaraid</title>
+  <title>Faraid Calculator – SmartFaraid</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -176,7 +176,7 @@ a { color: inherit; }
 }
 .book-frame__img { max-width: 260px; max-height: 320px; object-fit: contain; filter: drop-shadow(0 24px 50px rgba(0,0,0,.45)); }
 .book-frame--placeholder { background: linear-gradient(145deg, #1f4a30, #0e2818); width: 220px; height: 280px; border-radius: 4px 16px 16px 4px; box-shadow: -8px 6px 0 #0a1e10, 0 20px 60px rgba(0,0,0,.5); }
-.book-frame--placeholder::after { content: 'SIJIL FARAID'; color: var(--gold-light); font-weight: 700; font-size: .8rem; letter-spacing: .1em; }
+.book-frame--placeholder::after { content: 'FARAID CERTIFICATE'; color: var(--gold-light); font-weight: 700; font-size: .8rem; letter-spacing: .1em; }
 
 /* ============ SHARED SECTION STYLES ============ */
 .section-label {
@@ -691,23 +691,23 @@ a { color: inherit; }
 <!-- HEADER -->
 <header class="site-header" aria-label="Main navigation">
     <div class="site-header__brand-frame">
-      <a class="site-header__brand" href="index.html" aria-label="SmartFaraid home">
+      <a class="site-header__brand" href="index-en.html" aria-label="SmartFaraid home">
         <img src="images/Web_Logo.png" alt="SmartFaraid by SmartWills" onerror="this.src='images/logo_header.png'" />
       </a>
     </div>
     <div class="site-header__lang" aria-label="Language">
-      <a href="kalkulator.html" class="active">BM</a><span>|</span><a href="kalkulator-en.html">EN</a>
+      <a href="kalkulator.html">BM</a><span>|</span><a href="kalkulator-en.html" class="active">EN</a>
     </div>
   <div class="site-header__bar">
     <nav class="site-header__nav" aria-label="Primary navigation">
-      <a href="index.html">Laman Utama</a>
-      <a href="pelan.html">SmartFaraid</a>
-      <a href="panduan.html">Panduan Faraid</a>
-      <a href="kalkulator.html" aria-current="page">Kalkulator</a>
-      <a href="hubungikami.html">Hubungi Kami</a>
+      <a href="index-en.html">Home</a>
+      <a href="pelan-en.html">SmartFaraid</a>
+      <a href="panduan-en.html">Faraid Guide</a>
+      <a href="kalkulator-en.html" aria-current="page">Calculator</a>
+      <a href="hubungikami-en.html">Contact Us</a>
     </nav>
     <div class="site-header__actions" aria-label="Site actions">
-      <a class="site-header__login" href="https://app.mysmartwills.com/portal/?company_id=4">Log Masuk</a>
+      <a class="site-header__login" href="https://app.mysmartwills.com/portal/?company_id=4">Log In</a>
       <details class="site-header__mobile-menu">
         <summary aria-label="Open navigation menu">
           <span aria-hidden="true"></span>
@@ -715,14 +715,14 @@ a { color: inherit; }
           <span aria-hidden="true"></span>
         </summary>
         <div class="site-header__mobile-actions" aria-label="Mobile site actions">
-          <a class="site-header__mobile-login" href="https://app.mysmartwills.com/portal/?company_id=4">Log Masuk</a>
+          <a class="site-header__mobile-login" href="https://app.mysmartwills.com/portal/?company_id=4">Log In</a>
         </div>
         <nav aria-label="Mobile navigation">
-          <a href="index.html">Laman Utama</a>
-          <a href="pelan.html">SmartFaraid</a>
-          <a href="panduan.html">Panduan Faraid</a>
-          <a href="kalkulator.html">Kalkulator</a>
-          <a href="hubungikami.html">Hubungi Kami</a>
+          <a href="index-en.html">Home</a>
+          <a href="pelan-en.html">SmartFaraid</a>
+          <a href="panduan-en.html">Faraid Guide</a>
+          <a href="kalkulator-en.html">Calculator</a>
+          <a href="hubungikami-en.html">Contact Us</a>
         </nav>
       </details>
     </div>
@@ -731,15 +731,15 @@ a { color: inherit; }
 
 <!-- HERO -->
 <section class="page-hero">
-  <div class="page-hero__tag">Alat Percuma</div>
-  <h1>Kalkulator <em>Faraid</em></h1>
-  <p>Masukkan nilai harta dan maklumat waris untuk dapatkan anggaran pembahagian pusaka mengikut Mazhab Syafi'i. Untuk tujuan rujukan dan pendidikan sahaja.</p>
+  <div class="page-hero__tag">Free Tool</div>
+  <h1>Faraid <em>Calculator</em></h1>
+  <p>Enter your estate value and heir information to get an estimated inheritance distribution according to the Syafi'i school of thought. For reference and educational purposes only.</p>
 </section>
 
 <!-- PHOTO STRIP -->
-<section class="photo-strip" aria-label="Gambar keluarga">
+<section class="photo-strip" aria-label="Family photo">
   <div class="photo-strip__inner">
-    <img src="images/kalkulator_hero.png" alt="Keluarga Muslim menggunakan kalkulator Faraid" loading="lazy" onerror="this.closest('.photo-strip').classList.add('photo-strip--empty')" />
+    <img src="images/kalkulator_hero.png" alt="Muslim family using the Faraid calculator" loading="lazy" onerror="this.closest('.photo-strip').classList.add('photo-strip--empty')" />
   </div>
 </section>
 
@@ -750,51 +750,51 @@ a { color: inherit; }
   <div>
     <!-- STEP 1: ESTATE -->
     <div class="panel">
-      <h2><span class="step-badge">1</span> Nilai Harta Pusaka</h2>
-      <p class="panel__sub">Masukkan jumlah harta kasar dan tanggungan yang perlu diselesaikan terlebih dahulu.</p>
+      <h2><span class="step-badge">1</span> Estate Value</h2>
+      <p class="panel__sub">Enter the total gross estate and liabilities that need to be settled first.</p>
 
       <div class="field-group">
-        <label for="grossEstate">Jumlah Harta Kasar (RM)</label>
+        <label for="grossEstate">Total Gross Estate (RM)</label>
         <div class="input-prefix"><span>RM</span><input type="number" id="grossEstate" min="0" step="100" placeholder="0" value="1000000" /></div>
-        <p class="field-hint">Jumlah keseluruhan aset si mati sebelum sebarang potongan.</p>
+        <p class="field-hint">The total value of the deceased's assets before any deductions.</p>
       </div>
 
       <div class="grid-2">
         <div class="field-group">
-          <label for="funeralCost">Kos Jenazah (RM)</label>
+          <label for="funeralCost">Funeral Costs (RM)</label>
           <div class="input-prefix"><span>RM</span><input type="number" id="funeralCost" min="0" step="50" placeholder="0" value="5000" /></div>
         </div>
         <div class="field-group">
-          <label for="debts">Hutang Si Mati (RM)</label>
+          <label for="debts">Deceased's Debts (RM)</label>
           <div class="input-prefix"><span>RM</span><input type="number" id="debts" min="0" step="100" placeholder="0" value="20000" /></div>
         </div>
       </div>
 
       <div class="grid-2">
         <div class="field-group">
-          <label for="harta SepenCarian">Harta Sepencarian (RM)</label>
+          <label for="harta SepenCarian">Jointly-Acquired Property (RM)</label>
           <div class="input-prefix"><span>RM</span><input type="number" id="sepencarian" min="0" step="100" placeholder="0" value="0" /></div>
-          <p class="field-hint">Bahagian pasangan hidup, diasingkan dahulu.</p>
+          <p class="field-hint">The surviving spouse's share, separated out first.</p>
         </div>
         <div class="field-group">
-          <label for="wasiat">Wasiat (RM, maks. 1/3 baki)</label>
+          <label for="wasiat">Bequest / Wasiat (RM, max. 1/3 of balance)</label>
           <div class="input-prefix"><span>RM</span><input type="number" id="wasiat" min="0" step="100" placeholder="0" value="0" /></div>
-          <p class="field-hint">Akan dihadkan automatik kepada 1/3 jika melebihi.</p>
+          <p class="field-hint">Will be automatically capped at 1/3 if it exceeds this.</p>
         </div>
       </div>
     </div>
 
     <!-- STEP 2: SPOUSE & PARENTS -->
     <div class="panel">
-      <h2><span class="step-badge">2</span> Pasangan & Ibu Bapa</h2>
-      <p class="panel__sub">Nyatakan waris yang masih hidup daripada kategori ini.</p>
+      <h2><span class="step-badge">2</span> Spouse &amp; Parents</h2>
+      <p class="panel__sub">Indicate which surviving heirs fall into this category.</p>
 
       <div class="toggle-row">
-        <div class="toggle-row__label">Si mati lelaki, mempunyai isteri hidup<small>Sehingga 4 isteri (poligami) jika berkenaan</small></div>
+        <div class="toggle-row__label">Deceased is male, has a surviving wife/wives<small>Up to 4 wives (polygamy) if applicable</small></div>
         <label class="switch"><input type="checkbox" id="hasWife"><span class="slider"></span></label>
       </div>
       <div class="toggle-row" id="wifeCountRow" style="display:none">
-        <div class="toggle-row__label">Bilangan Isteri</div>
+        <div class="toggle-row__label">Number of Wives</div>
         <div class="stepper">
           <button type="button" data-step="-1" data-target="wifeCount">−</button>
           <span id="wifeCountVal">1</span>
@@ -802,33 +802,33 @@ a { color: inherit; }
         </div>
       </div>
       <div class="toggle-row">
-        <div class="toggle-row__label">Si mati perempuan, mempunyai suami hidup</div>
+        <div class="toggle-row__label">Deceased is female, has a surviving husband</div>
         <label class="switch"><input type="checkbox" id="hasHusband"><span class="slider"></span></label>
       </div>
       <div class="toggle-row">
-        <div class="toggle-row__label">Ibu masih hidup</div>
+        <div class="toggle-row__label">Mother is alive</div>
         <label class="switch"><input type="checkbox" id="hasMother"><span class="slider"></span></label>
       </div>
       <div class="toggle-row">
-        <div class="toggle-row__label">Bapa masih hidup</div>
+        <div class="toggle-row__label">Father is alive</div>
         <label class="switch"><input type="checkbox" id="hasFather"><span class="slider"></span></label>
       </div>
       <div class="toggle-row" id="grandparentRow">
-        <div class="toggle-row__label">Datuk sebelah bapa hidup<small>Hanya relevan jika bapa telah meninggal</small></div>
+        <div class="toggle-row__label">Paternal grandfather is alive<small>Only relevant if the father has passed away</small></div>
         <label class="switch"><input type="checkbox" id="hasGrandfather"><span class="slider"></span></label>
       </div>
       <div class="toggle-row" id="grandmotherRow">
-        <div class="toggle-row__label">Nenek (sebelah ibu/bapa) hidup<small>Hanya relevan jika ibu telah meninggal</small></div>
+        <div class="toggle-row__label">Grandmother (maternal/paternal) is alive<small>Only relevant if the mother has passed away</small></div>
         <label class="switch"><input type="checkbox" id="hasGrandmother"><span class="slider"></span></label>
       </div>
     </div>
 
     <!-- STEP 3: CHILDREN -->
     <div class="panel">
-      <h2><span class="step-badge">3</span> Anak-anak</h2>
-      <p class="panel__sub">Bilangan anak kandung si mati yang masih hidup.</p>
+      <h2><span class="step-badge">3</span> Children</h2>
+      <p class="panel__sub">Number of the deceased's surviving biological children.</p>
       <div class="heir-row">
-        <div class="heir-row__label">Anak Lelaki<small>Asabah — penerima baki</small></div>
+        <div class="heir-row__label">Son(s)<small>Asabah — residuary heir</small></div>
         <div class="stepper">
           <button type="button" data-step="-1" data-target="sonCount">−</button>
           <span id="sonCountVal">0</span>
@@ -836,7 +836,7 @@ a { color: inherit; }
         </div>
       </div>
       <div class="heir-row">
-        <div class="heir-row__label">Anak Perempuan<small>1/2 (seorang) atau 2/3 (ramai), jika tiada anak lelaki</small></div>
+        <div class="heir-row__label">Daughter(s)<small>1/2 (one) or 2/3 (more than one), if there are no sons</small></div>
         <div class="stepper">
           <button type="button" data-step="-1" data-target="daughterCount">−</button>
           <span id="daughterCountVal">2</span>
@@ -847,10 +847,10 @@ a { color: inherit; }
 
     <!-- STEP 4: SIBLINGS (KALALAH) -->
     <div class="panel">
-      <h2><span class="step-badge">4</span> Saudara-mara (Kalalah)</h2>
-      <p class="panel__sub">Hanya relevan jika si mati tiada anak <em>dan</em> tiada bapa/datuk hidup.</p>
+      <h2><span class="step-badge">4</span> Siblings (Kalalah)</h2>
+      <p class="panel__sub">Only relevant if the deceased has no children <em>and</em> no surviving father/grandfather.</p>
       <div class="heir-row">
-        <div class="heir-row__label">Saudara Lelaki Seibu-sebapa<small>Asabah jika tiada anak &amp; bapa</small></div>
+        <div class="heir-row__label">Full Brother(s)<small>Asabah if there are no children &amp; no father</small></div>
         <div class="stepper">
           <button type="button" data-step="-1" data-target="fullBrotherCount">−</button>
           <span id="fullBrotherCountVal">0</span>
@@ -858,7 +858,7 @@ a { color: inherit; }
         </div>
       </div>
       <div class="heir-row">
-        <div class="heir-row__label">Saudara Perempuan Seibu-sebapa<small>1/2 (seorang) atau 2/3 (ramai), jika tiada saudara lelaki</small></div>
+        <div class="heir-row__label">Full Sister(s)<small>1/2 (one) or 2/3 (more than one), if there are no full brothers</small></div>
         <div class="stepper">
           <button type="button" data-step="-1" data-target="fullSisterCount">−</button>
           <span id="fullSisterCountVal">0</span>
@@ -867,22 +867,22 @@ a { color: inherit; }
       </div>
     </div>
 
-    <button class="btn-calc" id="calcBtn">Kira Pembahagian Faraid</button>
-    <button class="btn-reset" id="resetBtn">Set Semula Borang</button>
+    <button class="btn-calc" id="calcBtn">Calculate Faraid Distribution</button>
+    <button class="btn-reset" id="resetBtn">Reset Form</button>
   </div>
 
   <!-- RIGHT: RESULTS -->
   <div class="results-sticky">
     <div class="panel" id="resultsPanel">
-      <h2 style="margin-bottom:1rem">Anggaran Pembahagian</h2>
+      <h2 style="margin-bottom:1rem">Estimated Distribution</h2>
       <div id="resultsContent">
         <div class="result-empty">
           <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
-          <p>Lengkapkan maklumat di sebelah kiri dan klik "Kira Pembahagian Faraid" untuk melihat anggaran bahagian setiap waris.</p>
+          <p>Complete the information on the left and click "Calculate Faraid Distribution" to see the estimated share for each heir.</p>
         </div>
       </div>
       <div class="disclaimer-box">
-        <strong>Penafian:</strong> Kalkulator ini memberikan anggaran berdasarkan Mazhab Syafi'i yang diamalkan di Malaysia, untuk tujuan pendidikan sahaja. Kes yang melibatkan datuk/nenek, kalalah kompleks, atau isteri berbilang perlu disahkan oleh Peguam Panel bertauliah atau institusi seperti Amanah Raya / Baitulmal.
+        <strong>Disclaimer:</strong> This calculator provides an estimate based on the Syafi'i school of thought as practiced in Malaysia, for educational purposes only. Cases involving grandparents, complex kalalah situations, or multiple wives should be verified by a licensed Panel Lawyer or an institution such as Amanah Raya / Baitulmal.
       </div>
     </div>
   </div>
@@ -892,11 +892,11 @@ a { color: inherit; }
     <div class="site-footer__wave"></div>
     <div class="site-footer__inner">
       <div class="site-footer__top">
-        <a class="site-footer__brand" href="index.html" aria-label="WasiatKu home">
+        <a class="site-footer__brand" href="index-en.html" aria-label="WasiatKu home">
           <img src="images/footer_logo.png" alt="SmartWills" class="site-footer__brand-mark" />
         </a>
         <div class="site-footer__tagline">
-          <img src="images/slogan.png" alt="Cara paling PINTAR dan PANTAS" />
+          <img src="images/slogan.png" alt="The SMARTEST and FASTEST way" />
         </div>
       </div>
 
@@ -908,17 +908,17 @@ a { color: inherit; }
       <div class="site-footer__info">
         <div class="site-footer__contact">
           <section>
-            <h3>Perkhidmatan Pelanggan</h3>
+            <h3>Customer Service</h3>
             <a href="tel:+60182209929">+6018-220 9929</a>
           </section>
           <section>
-            <h3>Emel</h3>
+            <h3>Email</h3>
             <a href="mailto:enquiry@wasiatku.com.my">enquiry@wasiatku.com.my</a>
           </section>
         </div>
 
         <section class="site-footer__address">
-          <h3>Alamat - Ibu Pejabat</h3>
+          <h3>Address - Head Office</h3>
           <p>No 46A (First Floor), Jalan Ambong 1,<br />Kepong Baru 52100, Kuala Lumpur, Malaysia</p>
           <a class="site-footer__map" href="https://maps.app.goo.gl/bdPqnX4pgEkWG3TC8" aria-label="Open office address in Google Maps">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
@@ -927,7 +927,7 @@ a { color: inherit; }
         </section>
 
         <section class="site-footer__address">
-          <h3>Alamat - Pusat Latihan</h3>
+          <h3>Address - Training Center</h3>
           <p>
             B-2-19, Blok Bougainvilla, 10 Boulevard,<br />
             Lebuhraya Sprint, PJU6A, 47400 Petaling Jaya,<br />
@@ -1040,7 +1040,7 @@ a { color: inherit; }
     document.getElementById('resultsContent').innerHTML = `
       <div class="result-empty">
         <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
-        <p>Lengkapkan maklumat di sebelah kiri dan klik "Kira Pembahagian Faraid" untuk melihat anggaran bahagian setiap waris.</p>
+        <p>Complete the information on the left and click "Calculate Faraid Distribution" to see the estimated share for each heir.</p>
       </div>`;
   });
 
@@ -1078,13 +1078,13 @@ a { color: inherit; }
     // Spouse
     if (hasHusbandC) {
       const num = hasChildren ? DEN / 4 : DEN / 2;
-      shares.push({ key: 'husband', name: 'Suami', meta: hasChildren ? 'Ada anak — 1/4' : 'Tiada anak — 1/2', num, den: DEN, type: 'fixed' });
+      shares.push({ key: 'husband', name: 'Husband', meta: hasChildren ? 'Has children — 1/4' : 'No children — 1/2', num, den: DEN, type: 'fixed' });
     }
     if (hasWifeC) {
       const totalNum = hasChildren ? DEN / 8 : DEN / 4;
       const each = totalNum / wifeCount;
       for (let i = 1; i <= wifeCount; i++) {
-        shares.push({ key: 'wife' + i, name: wifeCount > 1 ? `Isteri ${i}` : 'Isteri', meta: hasChildren ? `Ada anak — 1/8 dikongsi ${wifeCount} isteri` : `Tiada anak — 1/4 dikongsi ${wifeCount} isteri`, num: each, den: DEN, type: 'fixed' });
+        shares.push({ key: 'wife' + i, name: wifeCount > 1 ? `Wife ${i}` : 'Wife', meta: hasChildren ? `Has children — 1/8 shared among ${wifeCount} wives` : `No children — 1/4 shared among ${wifeCount} wives`, num: each, den: DEN, type: 'fixed' });
       }
     }
 
@@ -1094,10 +1094,10 @@ a { color: inherit; }
       const manyBro = (fullBrothers + fullSisters) >= 2 || hasChildren ? false : false; // simplified condition below
       if (hasChildren || (fullBrothers + fullSisters) >= 2) {
         motherNum = DEN / 6;
-        shares.push({ key: 'mother', name: 'Ibu', meta: 'Ada anak / 2+ adik-beradik — 1/6', num: motherNum, den: DEN, type: 'fixed' });
+        shares.push({ key: 'mother', name: 'Mother', meta: 'Has children / 2+ siblings — 1/6', num: motherNum, den: DEN, type: 'fixed' });
       } else {
         motherNum = DEN / 3;
-        shares.push({ key: 'mother', name: 'Ibu', meta: 'Tiada anak, kurang 2 adik-beradik — 1/3', num: motherNum, den: DEN, type: 'fixed' });
+        shares.push({ key: 'mother', name: 'Mother', meta: 'No children, fewer than 2 siblings — 1/3', num: motherNum, den: DEN, type: 'fixed' });
       }
     }
 
@@ -1105,26 +1105,26 @@ a { color: inherit; }
     let fatherIsAsabahOnly = false;
     if (hasFather) {
       if (sons > 0) {
-        shares.push({ key: 'father', name: 'Bapa', meta: 'Ada anak lelaki — 1/6', num: DEN / 6, den: DEN, type: 'fixed' });
+        shares.push({ key: 'father', name: 'Father', meta: 'Has son(s) — 1/6', num: DEN / 6, den: DEN, type: 'fixed' });
       } else if (daughters > 0) {
-        shares.push({ key: 'father', name: 'Bapa', meta: 'Ada anak perempuan sahaja — 1/6 + Asabah', num: DEN / 6, den: DEN, type: 'fixed-plus-residue', residueKey: 'father' });
+        shares.push({ key: 'father', name: 'Father', meta: 'Daughter(s) only — 1/6 + Asabah', num: DEN / 6, den: DEN, type: 'fixed-plus-residue', residueKey: 'father' });
       } else {
         fatherIsAsabahOnly = true;
-        shares.push({ key: 'father', name: 'Bapa', meta: 'Tiada anak — Asabah (baki)', num: 0, den: DEN, type: 'residue-only', residueKey: 'father' });
+        shares.push({ key: 'father', name: 'Father', meta: 'No children — Asabah (residue)', num: 0, den: DEN, type: 'residue-only', residueKey: 'father' });
       }
     } else if (hasGrandfather) {
       if (sons > 0) {
-        shares.push({ key: 'grandfather', name: 'Datuk', meta: 'Ada anak lelaki — 1/6', num: DEN / 6, den: DEN, type: 'fixed' });
+        shares.push({ key: 'grandfather', name: 'Grandfather', meta: 'Has son(s) — 1/6', num: DEN / 6, den: DEN, type: 'fixed' });
       } else if (daughters > 0) {
-        shares.push({ key: 'grandfather', name: 'Datuk', meta: 'Ada anak perempuan sahaja — 1/6 + Asabah', num: DEN / 6, den: DEN, type: 'fixed-plus-residue', residueKey: 'grandfather' });
+        shares.push({ key: 'grandfather', name: 'Grandfather', meta: 'Daughter(s) only — 1/6 + Asabah', num: DEN / 6, den: DEN, type: 'fixed-plus-residue', residueKey: 'grandfather' });
       } else {
-        shares.push({ key: 'grandfather', name: 'Datuk', meta: 'Tiada anak — Asabah (baki)', num: 0, den: DEN, type: 'residue-only', residueKey: 'grandfather' });
+        shares.push({ key: 'grandfather', name: 'Grandfather', meta: 'No children — Asabah (residue)', num: 0, den: DEN, type: 'residue-only', residueKey: 'grandfather' });
       }
     }
 
     // Grandmother (only if mother not alive)
     if (hasGrandmother) {
-      shares.push({ key: 'grandmother', name: 'Nenek', meta: 'Ibu tiada — 1/6', num: DEN / 6, den: DEN, type: 'fixed' });
+      shares.push({ key: 'grandmother', name: 'Grandmother', meta: 'Mother deceased — 1/6', num: DEN / 6, den: DEN, type: 'fixed' });
     }
 
     // Daughters (fixed, only if no sons)
@@ -1132,7 +1132,7 @@ a { color: inherit; }
       const totalNum = daughters === 1 ? DEN / 2 : (2 * DEN) / 3;
       const each = totalNum / daughters;
       for (let i = 1; i <= daughters; i++) {
-        shares.push({ key: 'daughter' + i, name: daughters > 1 ? `Anak Perempuan ${i}` : 'Anak Perempuan', meta: daughters === 1 ? 'Seorang, tiada anak lelaki — 1/2' : `${daughters} orang, tiada anak lelaki — 2/3 dikongsi`, num: each, den: DEN, type: 'fixed' });
+        shares.push({ key: 'daughter' + i, name: daughters > 1 ? `Daughter ${i}` : 'Daughter', meta: daughters === 1 ? 'One, no sons — 1/2' : `${daughters} daughters, no sons — 2/3 shared`, num: each, den: DEN, type: 'fixed' });
       }
     }
 
@@ -1141,7 +1141,7 @@ a { color: inherit; }
       const totalNum = fullSisters === 1 ? DEN / 2 : (2 * DEN) / 3;
       const each = totalNum / fullSisters;
       for (let i = 1; i <= fullSisters; i++) {
-        shares.push({ key: 'sister' + i, name: fullSisters > 1 ? `Saudara Perempuan ${i}` : 'Saudara Perempuan', meta: fullSisters === 1 ? 'Seorang — 1/2' : `${fullSisters} orang — 2/3 dikongsi`, num: each, den: DEN, type: 'fixed' });
+        shares.push({ key: 'sister' + i, name: fullSisters > 1 ? `Sister ${i}` : 'Sister', meta: fullSisters === 1 ? 'One — 1/2' : `${fullSisters} sisters — 2/3 shared`, num: each, den: DEN, type: 'fixed' });
       }
     }
 
@@ -1171,10 +1171,10 @@ a { color: inherit; }
       if (units > 0 && residueNum > 0) {
         const perUnit = residueNum / units;
         for (let i = 1; i <= sons; i++) {
-          asabahEntries.push({ name: sons > 1 ? `Anak Lelaki ${i}` : 'Anak Lelaki', meta: 'Asabah (2 bahagian)', num: perUnit * 2, den: DEN });
+          asabahEntries.push({ name: sons > 1 ? `Son ${i}` : 'Son', meta: 'Asabah (2 shares)', num: perUnit * 2, den: DEN });
         }
         for (let i = 1; i <= daughters; i++) {
-          asabahEntries.push({ name: daughters > 1 ? `Anak Perempuan ${i} (tambahan)` : 'Anak Perempuan (tambahan)', meta: 'Asabah (1 bahagian, bersama anak lelaki)', num: perUnit * 1, den: DEN });
+          asabahEntries.push({ name: daughters > 1 ? `Daughter ${i} (additional)` : 'Daughter (additional)', meta: 'Asabah (1 share, together with son(s))', num: perUnit * 1, den: DEN });
         }
         residueNum = 0;
       }
@@ -1183,7 +1183,7 @@ a { color: inherit; }
       if (rk && residueNum > 0) {
         const target = shares.find(h => h.key === rk.residueKey);
         target.num += residueNum;
-        target.meta += ` (+ baki ${fracLabel(residueNum, DEN)})`;
+        target.meta += ` (+ residue ${fracLabel(residueNum, DEN)})`;
         residueNum = 0;
       }
     } else if (!hasChildren && !hasFather && !hasGrandfather && fullBrothers > 0) {
@@ -1200,10 +1200,10 @@ a { color: inherit; }
       if (units > 0 && residueNum > 0) {
         const perUnit = residueNum / units;
         for (let i = 1; i <= fullBrothers; i++) {
-          asabahEntries.push({ name: fullBrothers > 1 ? `Saudara Lelaki ${i}` : 'Saudara Lelaki', meta: 'Asabah (2 bahagian)', num: perUnit * 2, den: DEN });
+          asabahEntries.push({ name: fullBrothers > 1 ? `Brother ${i}` : 'Brother', meta: 'Asabah (2 shares)', num: perUnit * 2, den: DEN });
         }
         for (let i = 1; i <= fullSisters; i++) {
-          asabahEntries.push({ name: fullSisters > 1 ? `Saudara Perempuan ${i}` : 'Saudara Perempuan', meta: 'Asabah (1 bahagian, bersama saudara lelaki)', num: perUnit * 1, den: DEN });
+          asabahEntries.push({ name: fullSisters > 1 ? `Sister ${i}` : 'Sister', meta: 'Asabah (1 share, together with brother(s))', num: perUnit * 1, den: DEN });
         }
         residueNum = 0;
       }
@@ -1224,25 +1224,25 @@ a { color: inherit; }
     let html = '';
 
     html += `<div class="net-estate-box">
-      <h4>Harta Pusaka Bersih (Untuk Faraid)</h4>
+      <h4>Net Estate (For Faraid)</h4>
       <div class="amount">${fmtMoney(r.netEstate)}</div>
       <div class="breakdown">
-        <div><span>Harta Kasar</span><span>${fmtMoney(r.gross)}</span></div>
-        <div><span>Tolak Kos Jenazah</span><span>− ${fmtMoney(r.funeral)}</span></div>
-        <div><span>Tolak Hutang</span><span>− ${fmtMoney(r.debts)}</span></div>
-        <div><span>Tolak Harta Sepencarian</span><span>− ${fmtMoney(r.sepencarian)}</span></div>
-        <div><span>Tolak Wasiat${r.wasiatCapped ? ' (dihadkan 1/3)' : ''}</span><span>− ${fmtMoney(r.wasiatUsed)}</span></div>
+        <div><span>Gross Estate</span><span>${fmtMoney(r.gross)}</span></div>
+        <div><span>Less: Funeral Costs</span><span>− ${fmtMoney(r.funeral)}</span></div>
+        <div><span>Less: Debts</span><span>− ${fmtMoney(r.debts)}</span></div>
+        <div><span>Less: Jointly-Acquired Property</span><span>− ${fmtMoney(r.sepencarian)}</span></div>
+        <div><span>Less: Bequest (Wasiat)${r.wasiatCapped ? ' (capped at 1/3)' : ''}</span><span>− ${fmtMoney(r.wasiatUsed)}</span></div>
       </div>
     </div>`;
 
     if (r.aulApplied) {
-      html += `<div class="aul-flag"><strong>Aul Dikenakan:</strong> Jumlah bahagian tetap waris melebihi keseluruhan harta. Bahagian setiap waris telah dikurangkan secara berkadar (penyebut asal ${r.originalDen} ditukar kepada ${r.den}) supaya jumlah keseluruhan kekal saksama.</div>`;
+      html += `<div class="aul-flag"><strong>Aul Applied:</strong> The total fixed shares of the heirs exceed the whole estate. Each heir's share has been proportionally reduced (the original denominator ${r.originalDen} adjusted to ${r.den}) so that the total remains fair.</div>`;
     }
 
     if (r.noHeirsAtAll) {
-      html += `<div class="baitulmal-note"><strong>Tiada Waris Dikenalpasti:</strong> Berdasarkan maklumat yang diberikan, tiada waris layak dikenal pasti. Harta akan diserahkan kepada Baitulmal mengikut prosedur negeri berkenaan. Sila rujuk Peguam Panel untuk pengesahan lanjut, terutamanya jika terdapat waris lain yang tidak disenaraikan di sini (contoh: datuk/nenek sebelah lain, cucu, dll).</div>`;
+      html += `<div class="baitulmal-note"><strong>No Heirs Identified:</strong> Based on the information provided, no eligible heirs could be identified. The estate will be handed over to Baitulmal according to the relevant state's procedure. Please consult a Panel Lawyer for further confirmation, especially if there are other heirs not listed here (e.g. grandparents on the other side, grandchildren, etc.).</div>`;
     } else {
-      html += `<table class="result-table"><thead><tr><th>Waris</th><th>Bahagian</th><th>Nilai (RM)</th></tr></thead><tbody>`;
+      html += `<table class="result-table"><thead><tr><th>Heir</th><th>Share</th><th>Value (RM)</th></tr></thead><tbody>`;
       r.heirs.forEach(h => {
         const amount = (h.num / r.den) * r.netEstate;
         html += `<tr>
@@ -1255,7 +1255,7 @@ a { color: inherit; }
 
       if (r.leftoverToBaitulmal > 0.0001) {
         const leftoverAmount = (r.leftoverToBaitulmal / r.den) * r.netEstate;
-        html += `<div class="no-residue-note">Baki tidak diagihkan: <strong>${fracLabel(r.leftoverToBaitulmal, r.den)}</strong> (${fmtMoney(leftoverAmount)}) — tiada waris Asabah dikenal pasti untuk menerima baki ini berdasarkan maklumat semasa. Dalam keadaan sebenar, baki ini mungkin diserahkan kepada waris lain yang tidak disenaraikan (contoh: datuk/nenek/saudara jauh) atau Baitulmal. Sila rujuk Peguam Panel untuk kepastian.</div>`;
+        html += `<div class="no-residue-note">Undistributed residue: <strong>${fracLabel(r.leftoverToBaitulmal, r.den)}</strong> (${fmtMoney(leftoverAmount)}) — no Asabah heir was identified to receive this residue based on the current information. In an actual case, this residue may be given to other heirs not listed here (e.g. grandparents/distant relatives) or to Baitulmal. Please consult a Panel Lawyer for confirmation.</div>`;
       }
     }
 

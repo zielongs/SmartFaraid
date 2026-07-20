@@ -49,9 +49,38 @@ a { color: inherit; }
   display: flex; align-items: center; justify-content: space-between;
   padding: 0;
   gap: 2rem;
+  height: 90px;
+  overflow: visible;
+}
+.site-header__brand-frame {
+  background: transparent;
+  height: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
 }
 .site-header__brand { display: flex; align-items: center; padding: 0; margin: 0; }
-.site-header__brand img { height: 110px; width: auto; display: block; margin: 0; padding: 0; }
+.site-header__brand img {
+  height: 130px; width: auto;
+  object-fit: contain;
+  display: block;
+  position: relative;
+  top: 14px;
+}
+@media (max-width: 640px) {
+  .site-header { height: 70px; }
+  .site-header__brand img { height: 96px; top: 12px; }
+}
+.site-header__lang { display: flex; align-items: center; gap: .4rem; margin-left: .25rem; font-size: .8rem; font-weight: 600; }
+.site-header__lang a { text-decoration: none; color: var(--muted); padding: .2rem .15rem; transition: color .2s; }
+.site-header__lang a.active { color: var(--green); }
+.site-header__lang a:hover { color: var(--green); }
+.site-header__lang span { color: var(--border); }
 .site-header__bar { display: flex; align-items: center; justify-content: flex-end; gap: 2rem; flex: 1; padding: .6rem 5% .6rem 1.5rem; }
 .site-header__nav { display: flex; gap: 1.75rem; }
 .site-header__nav a {
@@ -137,16 +166,18 @@ a { color: inherit; }
 
 .hero__visual { display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
 .book-frame {
-  width: 480px; height: 380px;
+  width: 640px; height: 500px;
   display: grid; place-items: center;
   position: relative;
 }
 .book-frame::before {
-  content: ''; position: absolute; width: 380px; height: 380px;
+  content: ''; position: absolute; width: 520px; height: 520px;
   background: radial-gradient(circle, rgba(200,157,72,.28), transparent 70%);
   border-radius: 50%; z-index: -1;
 }
 .book-frame__img { max-width: 460px; max-height: 360px; width: 100%; object-fit: contain; filter: drop-shadow(0 24px 50px rgba(0,0,0,.45)); }
+.book-frame__video-wrap { position: relative; max-width: 620px; width: 100%; }
+.book-frame__video { width: 100%; height: auto; display: block; border-radius: 16px; object-fit: cover; box-shadow: 0 24px 50px rgba(0,0,0,.45); background: #0e2818; }
 .book-frame--placeholder { background: linear-gradient(145deg, #1f4a30, #0e2818); width: 220px; height: 280px; border-radius: 4px 16px 16px 4px; box-shadow: -8px 6px 0 #0a1e10, 0 20px 60px rgba(0,0,0,.5); }
 .book-frame--placeholder::after { content: 'SIJIL FARAID'; color: var(--gold-light); font-weight: 700; font-size: .8rem; letter-spacing: .1em; }
 
@@ -237,6 +268,23 @@ a { color: inherit; }
 .btn--outline-white:hover { border-color: var(--white); transform: translateY(-2px); }
 .product-card__body .btn { width: 100%; }
 .product-card__note { font-size: .78rem; color: var(--muted); background: var(--cream); border-left: 3px solid var(--gold); border-radius: 4px; padding: .6rem .85rem; margin-bottom: 1rem; line-height: 1.5; }
+
+/* ============ CALCULATOR PROMO ============ */
+.calc-promo-section { padding: 5.5rem 5%; background: var(--cream); }
+.calc-promo-section__inner { max-width: 1000px; margin: 0 auto; }
+.calc-promo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.5rem; margin: 2.5rem 0 3rem; }
+.calc-promo-card {
+  background: var(--white); border-radius: var(--radius); padding: 1.75rem 1.5rem;
+  border: 1.5px solid var(--border); text-align: center; transition: transform .2s, box-shadow .2s;
+}
+.calc-promo-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,79,56,.1); }
+.calc-promo-card__icon { width: 56px; height: 56px; border-radius: 14px; background: var(--gold-pale); margin: 0 auto 1rem; display: grid; place-items: center; }
+.calc-promo-card__icon img, .calc-promo-card__icon svg { width: 28px; height: 28px; }
+.calc-promo-card h3 { font-size: .95rem; font-weight: 700; color: var(--green); margin-bottom: .4rem; }
+.calc-promo-card p { font-size: .83rem; color: var(--muted); line-height: 1.6; }
+.calc-promo-cta { text-align: center; }
+.calc-promo-cta .btn { padding: .95rem 2.5rem; font-size: 1rem; }
+.calc-promo-cta p { margin-top: 1rem; font-size: .82rem; color: var(--muted); }
 
 /* ============ PROCESS ============ */
 .process-section { background: var(--cream); padding: 5.5rem 5%; }
@@ -373,7 +421,7 @@ a { color: inherit; }
   .hero__copy { margin-left: auto; margin-right: auto; }
   .hero__visual { order: -1; }
   .book-frame { width: 320px; height: 260px; }
-  .book-frame__img { max-width: 300px; max-height: 240px; }
+  .book-frame__video { max-width: 300px; max-height: 240px; }
 }
 @media (max-width: 860px) {
   .site-header__nav { display: none; }
@@ -525,9 +573,14 @@ a { color: inherit; }
 </head>
 <body>
   <header class="site-header" aria-label="Main navigation">
-    <a class="site-header__brand" href="index.html" aria-label="SmartFaraid home">
-      <img src="images/logo_header.png" alt="SmartFaraid by SmartWills" />
-    </a>
+    <div class="site-header__brand-frame">
+      <a class="site-header__brand" href="index.html" aria-label="SmartFaraid home">
+          <img src="images/Web_Logo.png" alt="SmartFaraid by SmartWills" onerror="this.src='images/logo_header.png'" />
+      </a>
+    </div>
+    <div class="site-header__lang" aria-label="Language">
+      <a href="index.html" class="active">BM</a><span>|</span><a href="index-en.html">EN</a>
+    </div>
 
     <div class="site-header__bar">
       <nav class="site-header__nav" aria-label="Primary navigation">
@@ -575,7 +628,7 @@ a { color: inherit; }
           seluruh Malaysia, dengan pilihan untuk memfailkan sendiri atau melalui Peguam Panel kami.
         </p>
         <div class="hero__actions">
-          <a class="btn btn--gold" href="pelan.html">Mohon Sekarang</a>
+          <a class="btn btn--gold" href="pelan.html">Buat Sekarang</a>
           <a class="btn btn--outline" href="#kenapa">Ketahui Lebih Lanjut</a>
         </div>
 
@@ -588,7 +641,11 @@ a { color: inherit; }
 
       <div class="hero__visual">
         <div class="book-frame">
-          <img src="images/book_green.png" alt="Sijil Faraid" class="book-frame__img" onerror="this.style.display='none'; this.parentElement.classList.add('book-frame--placeholder')" />
+          <div class="book-frame__video-wrap">
+            <video class="book-frame__video" controls playsinline onerror="this.style.display='none'; this.parentElement.parentElement.classList.add('book-frame--placeholder')">
+              <source src="images/smartfaraid_video.mp4" type="video/mp4" />
+            </video>
+          </div>
         </div>
       </div>
     </section>
@@ -623,75 +680,35 @@ a { color: inherit; }
       </div>
     </section>
 
-    <!-- PRODUCT TIERS -->
-    <section class="products-section" id="produk" aria-label="Produk SmartFaraid">
-      <div class="products-section__inner">
-        <p class="section-label">Pilihan Pelan</p>
-        <h2 class="section-title">Produk SmartFaraid</h2>
-        <p class="section-sub">Pilih tahap perkhidmatan yang sesuai dengan keperluan keluarga anda — dari persediaan sendiri hinggalah bantuan penuh Peguam Panel kami.</p>
+    <!-- KALKULATOR PROMO -->
+    <section class="calc-promo-section" id="kalkulator-promo" aria-label="Kalkulator Faraid">
+      <div class="calc-promo-section__inner">
+        <p class="section-label">Percuma & Tanpa Daftar</p>
+        <h2 class="section-title">Anggarkan Pembahagian Faraid Anda Dalam Beberapa Minit</h2>
+        <p class="section-sub">Sebelum meneruskan permohonan Sijil Faraid rasmi, cuba Kalkulator Faraid SmartFaraid untuk mendapat gambaran awal pembahagian pusaka keluarga anda — pantas, mudah dan percuma.</p>
 
-        <div class="product-grid">
-          <!-- DIRECT -->
-          <article class="product-card">
-            <div class="product-card__head">
-              <span class="product-card__badge">Asas</span>
-              <h3>SmartFaraid <em>Direct</em></h3>
-              <p>Persediaan permohonan Sijil Faraid sendiri secara online — pantas dan menjimatkan.</p>
-            </div>
-            <div class="product-card__body">
-              <div class="product-card__price">RM 400</div>
-              <ul class="product-card__features">
-                <li>Pengiraan anggaran Faraid secara automatik</li>
-                <li>Senarai waris yang berhak</li>
-                <li>Susunan aset dan liabiliti asas</li>
-                <li>Dokumen rumusan Faraid (PDF)</li>
-                <li>Akses kalkulator dalam talian</li>
-              </ul>
-              <a class="btn btn--gold-outline" href="https://app.mysmartwills.com/?item_id=80">Mohon Sekarang</a>
-            </div>
+        <div class="calc-promo-grid">
+          <article class="calc-promo-card">
+            <div class="calc-promo-card__icon"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2.05V4.05C17.39 4.59 20.5 8.58 19.96 12.97C19.5 16.61 16.64 19.5 13 19.93V21.93C18.5 21.38 22.5 16.5 21.95 11C21.5 6.25 17.73 2.5 13 2.05M11 2.06C9.05 2.25 7.19 3 5.67 4.26L7.1 5.74C8.22 4.84 9.57 4.26 11 4.06V2.06M4.26 5.67C3 7.19 2.25 9.04 2.05 11H4.05C4.24 9.58 4.8 8.23 5.69 7.1L4.26 5.67M2.06 13C2.26 14.96 3.03 16.81 4.27 18.33L5.69 16.9C4.81 15.77 4.24 14.42 4.06 13H2.06M7.1 18.37L5.67 19.74C7.18 21 9.04 21.79 11 22V20C9.58 19.82 8.23 19.25 7.1 18.37M12 7L7 12H10V16H14V12H17L12 7Z" fill="#C89D48"/></svg></div>
+            <h3>Pantas & Percuma</h3>
+            <p>Dapatkan anggaran pembahagian Faraid dalam masa beberapa minit sahaja, tanpa sebarang caj.</p>
           </article>
-
-          <!-- BANTUAN -->
-          <article class="product-card product-card--featured">
-            <div class="product-card__head">
-              <span class="product-card__badge product-card__badge--white">Popular</span>
-              <h3>SmartFaraid <em>Bantuan</em></h3>
-              <p>Sudah ada dokumen Permohonan Sijil Faraid? Biar Peguam Panel kami yang uruskan pemfailan bagi pihak anda.</p>
-            </div>
-            <div class="product-card__body">
-              <div class="product-card__price">RM 3500</div>
-              <ul class="product-card__features">
-                <li>Disemak dan difailkan oleh Peguam Panel</li>
-                <li>Pengesahan waris dan dokumen sokongan</li>
-                <li>Bantuan permohonan Sijil Faraid rasmi</li>
-                <li>Sokongan sepanjang proses mahkamah</li>
-              </ul>
-              <a class="btn btn--gold" href="https://app.mysmartwills.com/?item_id=80">Mohon Sekarang</a>
-            </div>
+          <article class="calc-promo-card">
+            <div class="calc-promo-card__icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" fill="#C89D48"/></svg></div>
+            <h3>Berpandukan Mazhab Syafi'i</h3>
+            <p>Pengiraan berdasarkan prinsip Faraid mengikut Mazhab Syafi'i yang diamalkan di Malaysia.</p>
           </article>
-
-          <!-- COVER -->
-          <article class="product-card">
-            <div class="product-card__head">
-              <span class="product-card__badge">Lengkap</span>
-              <h3>SmartFaraid <em>Cover</em></h3>
-              <p>Ahli waris lebih daripada 1 lapis kematian. Termasuk sesi konsultasi, penyediaan dokumen dan pemfailan di Mahkamah.</p>
-            </div>
-            <div class="product-card__body">
-              <div class="product-card__price">RM 4800</div>
-              <ul class="product-card__features">
-                <li>Semua dalam SmartFaraid Bantuan +</li>
-                <li>Liputan lebih daripada 1 lapis kematian</li>
-                <li>Sesi konsultasi bersama Peguam Panel kami</li>
-                <li>Bantuan pendrafan dan pemfailan dokumen</li>
-                <li>Pengurus kes peribadi sepanjang proses</li>
-              </ul>
-              <a class="btn btn--gold-outline" href="https://app.mysmartwills.com/?item_id=80">Mohon Sekarang</a>
-            </div>
+          <article class="calc-promo-card">
+            <div class="calc-promo-card__icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="#C89D48"/></svg></div>
+            <h3>Langkah Pertama Yang Jelas</h3>
+            <p>Fahami dahulu kedudukan waris anda sebelum meneruskan permohonan Sijil Faraid rasmi.</p>
           </article>
         </div>
 
-        <p class="products-section__note">Perlukan bantuan memilih pelan? <a href="https://wa.me/60182209929">Hubungi kami</a> untuk maklumat lanjut.</p>
+        <div class="calc-promo-cta">
+          <a class="btn btn--gold" href="kalkulator.html">Cuba Kalkulator Sekarang</a>
+          <p>Anggaran sahaja — untuk keputusan rasmi, sila mohon Sijil Faraid melalui <a href="pelan.html" style="color: var(--gold-dark); font-weight: 600;">SmartFaraid</a>.</p>
+        </div>
       </div>
     </section>
 
